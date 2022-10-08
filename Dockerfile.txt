@@ -1,4 +1,0 @@
-FROM ubuntu
-
-WORKDIR /the/workdir/path  
-
