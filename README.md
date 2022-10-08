@@ -1,8 +1,32 @@
 # CSCE482-483-931_22F-2A1
 
-## 2A1. Traffic Object/Lane Detection
-● Evaluate existing detection framework on our dataset
+<!-- ## Team: 2A1. Traffic Object/Lane Detection -->
 
-● Integrate existing detection framework with ROS/ROS2
+<!-- <img src="logo.png" alt="Team Logo" width="25%" height="auto"> -->
 
-● Input: image, Output: bounding boxes/classification results
+
+<p align="center">
+  <a>
+    <img src="logo.png" alt="Team Logo" width="300" height="auto">
+  </a>
+  <h3 align="center">2A1. Traffic Object/Lane Detection</h3>
+  <!-- <p align="center">
+    Mini Description Here...
+  </p> -->
+</p>
+
+### Objectives: 
+* Evaluate existing detection framework on our dataset
+* Integrate existing detection framework with ROS/ROS2
+* Input: image, Output: bounding boxes/classification results
+
+### Contributors:
+Team Name: OLD482
+* Pavan Poladi
+* Khai Nguyen
+* Viet Nguyen
+* Jason Bernal
+
+
+### Resources Used:
+* Learn Docker in 7 Easy Steps - Full Beginner's Tutorial [https://www.youtube.com/watch?v=gAkwW2tuIqE](https://www.youtube.com/watch?v=gAkwW2tuIqE)
