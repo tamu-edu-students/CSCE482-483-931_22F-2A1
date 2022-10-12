@@ -31,3 +31,4 @@ Team Name: OLD482
 ### Resources Used:
 * Learn Docker in 7 Easy Steps - Full Beginner's Tutorial [https://www.youtube.com/watch?v=gAkwW2tuIqE](https://www.youtube.com/watch?v=gAkwW2tuIqE)
 * ROS Tutorial 5 (ROS1) - Write a ROS Node with Python [https://www.youtube.com/watch?v=jWtkzDbez9M](https://www.youtube.com/watch?v=jWtkzDbez9M)
+* How to setup ROS with Python 3 [https://medium.com/@beta_b0t/how-to-setup-ros-with-python-3-44a69ca36674](https://medium.com/@beta_b0t/how-to-setup-ros-with-python-3-44a69ca36674)
