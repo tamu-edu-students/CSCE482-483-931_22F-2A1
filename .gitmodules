@@ -1,0 +1,3 @@
+[submodule "HybridNets"]
+	path = HybridNets
+	url = https://github.com/datvuthanh/HybridNets.git
