@@ -8,6 +8,8 @@ from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
 from PIL import Image as displayImage
 import torchvision.transforms as transforms
+from utils.utils import letterbox, scale_coords, postprocess, BBoxTransform, ClipBoxes, restricted_float, boolean_string, Params
+import argparse
 
 
 bridge = CvBridge()
@@ -39,6 +41,20 @@ def callback_Img(data):
     print("Classification:", classification)
     print("Anchors:", anchors)
     print("Segmentation:", segmentation)
+    
+    regressBoxes = BBoxTransform()
+    clipBoxes = ClipBoxes()
+    parser = argparse.ArgumentParser('HybridNets: End-to-End Perception Network - DatVu')
+    args = parser.parse_args()
+    threshold = args.conf_thresh
+    iou_threshold = args.iou_thresh
+    
+    
+    
+    
+    
+    
+    
     
     
     
