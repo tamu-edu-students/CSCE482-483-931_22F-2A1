@@ -12,6 +12,8 @@ import torchvision.transforms as transforms
 
 bridge = CvBridge()
 
+#instantiate HybridNets Model
+model = torch.hub.load('datvuthanh/hybridnets', 'hybridnets', pretrained=True)
 
 def callback_Img(data):
     img = bridge.imgmsg_to_cv2(data, desired_encoding='rgb8')
@@ -28,6 +30,17 @@ def callback_Img(data):
     #Convert PIL to Tensor format
     trans = transforms.Compose([transforms.PILToTensor()])
     tensorImage = trans(pilImg)
+    
+    #run model
+    features, regression, classification, anchors, segmentation = model(tensorImage)
+
+    print("Features:", features)
+    print("Regression:", regression)
+    print("Classification:", classification)
+    print("Anchors:", anchors)
+    print("Segmentation:", segmentation)
+    
+    
     
     # Start coordinate, here (5, 5)
     # represents the top left corner of rectangle
