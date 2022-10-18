@@ -48,6 +48,14 @@ def callback_Img(data):
     args = parser.parse_args()
     threshold = args.conf_thresh
     iou_threshold = args.iou_thresh
+    output = args.output
+    imshow = args.imshow
+    imwrite = args.imwrite
+    show_det = args.show_det
+    show_seg = args.show_seg
+    os.makedirs(output, exist_ok=True)
+
+    out = postprocess(x, anchors, regression, classification, regressBoxes, clipBoxes, threshold, iou_threshold)
     
     
     
