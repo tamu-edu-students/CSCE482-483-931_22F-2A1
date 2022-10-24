@@ -1,0 +1,8 @@
+/root/rootfs/demo_workspace/build/turtlesim/rosidl_adapter/turtlesim:action/RotateAbsolute.idl
+/root/rootfs/demo_workspace/build/turtlesim/rosidl_adapter/turtlesim:msg/Color.idl
+/root/rootfs/demo_workspace/build/turtlesim/rosidl_adapter/turtlesim:msg/Pose.idl
+/root/rootfs/demo_workspace/build/turtlesim/rosidl_adapter/turtlesim:srv/Kill.idl
+/root/rootfs/demo_workspace/build/turtlesim/rosidl_adapter/turtlesim:srv/SetPen.idl
+/root/rootfs/demo_workspace/build/turtlesim/rosidl_adapter/turtlesim:srv/Spawn.idl
+/root/rootfs/demo_workspace/build/turtlesim/rosidl_adapter/turtlesim:srv/TeleportAbsolute.idl
+/root/rootfs/demo_workspace/build/turtlesim/rosidl_adapter/turtlesim:srv/TeleportRelative.idl

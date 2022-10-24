@@ -1,0 +1,8 @@
+prefix=/root/rootfs/rootfs/catkin_ws/install
+
+Name: ros_basics_tutorials
+Description: Description of ros_basics_tutorials
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
