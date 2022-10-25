@@ -16,7 +16,7 @@
 </p>
 
 ### Objectives: 
-* Evaluate existing detection framework on our dataset
+* Evaluate existing detection framework on our dataset: [https://github.com/datvuthanh/HybridNets](https://github.com/datvuthanh/HybridNets)
 * Integrate existing detection framework with ROS/ROS2
 * Input: image, Output: bounding boxes/classification results
 
@@ -32,3 +32,4 @@ Team Name: OLD482
 * Learn Docker in 7 Easy Steps - Full Beginner's Tutorial [https://www.youtube.com/watch?v=gAkwW2tuIqE](https://www.youtube.com/watch?v=gAkwW2tuIqE)
 * ROS Tutorial 5 (ROS1) - Write a ROS Node with Python [https://www.youtube.com/watch?v=jWtkzDbez9M](https://www.youtube.com/watch?v=jWtkzDbez9M)
 * How to setup ROS with Python 3 [https://medium.com/@beta_b0t/how-to-setup-ros-with-python-3-44a69ca36674](https://medium.com/@beta_b0t/how-to-setup-ros-with-python-3-44a69ca36674)
+* [http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29](http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28python%29)

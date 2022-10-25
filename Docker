@@ -2,6 +2,8 @@ FROM ubuntu
 
 WORKDIR /the/workdir/path  
 
+# THIS IS JUST A TEMPLATE; CHANGE AS NEEDED 
+
 # COPY --chown=user:group
 
 # RUN npm install
