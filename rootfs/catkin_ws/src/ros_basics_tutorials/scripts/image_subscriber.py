@@ -37,30 +37,30 @@ color_list_seg = {}
 #rint("Khai is good")
 bridge = CvBridge()
 def callback_Img(data):
-    print("Khai is good")
-    img = bridge.imgmsg_to_cv2(data, desired_encoding='rgb8')
-    print("Khai is good")
-    # Start coordinate, here (5, 5)
-# represents the top left corner of rectangle
-    start_point = (5, 5)
-  
-# Ending coordinate, here (220, 220)
-# represents the bottom right corner of rectangle
-    end_point = (220, 220)
-  
-# Blue color in BGR
-    color = (255, 0, 0)
+	print("Khai is good")
+	img = bridge.imgmsg_to_cv2(data, desired_encoding='rgb8')
+	print("Khai is good")
+	# Start coordinate, here (5, 5)
+	# represents the top left corner of rectangle
+	start_point = (5, 5)
+
+	# Ending coordinate, here (220, 220)
+	# represents the bottom right corner of rectangle
+	end_point = (220, 220)
+
+	# Blue color in BGR
+	color = (255, 0, 0)
 
 
-# Line thickness of 2 px
-    thickness = 2
-    img = cv2.rectangle(img, start_point, end_point, color, thickness)
-    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    
-    
-    # This is the lines of code from Hybridnets
-    
-    # Initialization
+	# Line thickness of 2 px
+	thickness = 2
+	img = cv2.rectangle(img, start_point, end_point, color, thickness)
+	gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+
+	# This is the lines of code from Hybridnets
+
+	# Initialization
 	params = Params(f'HybridNets/projects/bdd100k.yml')
 	input_imgs = []
 	shapes = []
@@ -71,8 +71,8 @@ def callback_Img(data):
 	img_path = glob(f'{source}/*.jpg')
 	color_list_seg = {}
 	for seg_class in params.seg_list:
-	    # edit your color here if you wanna fix to your liking
-	    color_list_seg[seg_class] = list(np.random.choice(range(256), size=3))
+		# edit your color here if you wanna fix to your liking
+		color_list_seg[seg_class] = list(np.random.choice(range(256), size=3))
 	#compound_coef = args.compound_coef
 	#source = args.source
 
@@ -106,26 +106,26 @@ def callback_Img(data):
 	# cv2.imwrite('normalized.jpg', normalized_imgs[0]*255)
 	resized_shape = params.model['image_size']
 	if isinstance(resized_shape, list):
-	    resized_shape = max(resized_shape)
-	normalize = transforms.Normalize(
-	    mean=params.mean, std=params.std
-	)
-	transform = transforms.Compose([
-	    transforms.ToTensor(),
-	    normalize,
-	])
+		resized_shape = max(resized_shape)
+		normalize = transforms.Normalize(
+		mean=params.mean, std=params.std
+		)
+		transform = transforms.Compose([
+		transforms.ToTensor(),
+		normalize,
+		])
 	for ori_img in ori_imgs:
-	    h0, w0 = ori_img.shape[:2]  # orig hw
-	    r = resized_shape / max(h0, w0)  # resize image to img_size
-	    input_img = cv2.resize(ori_img, (int(w0 * r), int(h0 * r)), interpolation=cv2.INTER_AREA)
-	    h, w = input_img.shape[:2]
+		h0, w0 = ori_img.shape[:2]  # orig hw
+		r = resized_shape / max(h0, w0)  # resize image to img_size
+		input_img = cv2.resize(ori_img, (int(w0 * r), int(h0 * r)), interpolation=cv2.INTER_AREA)
+		h, w = input_img.shape[:2]
 
-	    (input_img, _), ratio, pad = letterbox((input_img, None), resized_shape, auto=True,
-				                      scaleup=False)
+		(input_img, _), ratio, pad = letterbox((input_img, None), resized_shape, auto=True,
+			      scaleup=False)
 
-	    input_imgs.append(input_img)
-	    # cv2.imwrite('input.jpg', input_img * 255)
-	    shapes.append(((h0, w0), ((h / h0, w / w0), pad)))  # for COCO mAP rescaling
+		input_imgs.append(input_img)
+		# cv2.imwrite('input.jpg', input_img * 255)
+		shapes.append(((h0, w0), ((h / h0, w / w0), pad)))  # for COCO mAP rescaling
 
 
 
@@ -137,12 +137,12 @@ def callback_Img(data):
 	#new_weight = OrderedDict((k[6:], v) for k, v in weight['model'].items())
 	weight_last_layer_seg = weight['segmentation_head.0.weight']
 	if weight_last_layer_seg.size(0) == 1:
-	    seg_mode = BINARY_MODE
+		seg_mode = BINARY_MODE
 	else:
-	    if params.seg_multilabel:
-		seg_mode = MULTILABEL_MODE
-	    else:
-		seg_mode = MULTICLASS_MODE
+		if params.seg_multilabel:
+			seg_mode = MULTILABEL_MODE
+		else:
+			seg_mode = MULTICLASS_MODE
 	print("DETECTED SEGMENTATION MODE FROM WEIGHT AND PROJECT FILE:", seg_mode)
 
 	model.load_state_dict(weight)
@@ -152,95 +152,93 @@ def callback_Img(data):
 
 
 	with torch.no_grad():
-	    features, regression, classification, anchors, seg = model(x)
+		features, regression, classification, anchors, seg = model(x)
 
-	    # in case of MULTILABEL_MODE, each segmentation class gets their own inference image
-	    seg_mask_list = []
-	    # (B, C, W, H) -> (B, W, H)
-	    
-	    seg_mask_list = [torch.where(torch.sigmoid(seg)[:, i, ...] >= 0.5, 1, 0) for i in range(seg.size(1))]
+		# in case of MULTILABEL_MODE, each segmentation class gets their own inference image
+		seg_mask_list = []
+		# (B, C, W, H) -> (B, W, H)
+
+		seg_mask_list = [torch.where(torch.sigmoid(seg)[:, i, ...] >= 0.5, 1, 0) for i in range(seg.size(1))]
 		# but remove background class from the list
-	    seg_mask_list.pop(0)
-	   
-	    # (B, W, H) -> (W, H)
-	    for i in range(seg.size(0)):
-		#   print(i)
-		for seg_class_index, seg_mask in enumerate(seg_mask_list):
-		    seg_mask_ = seg_mask[i].squeeze().cpu().numpy()
-		    pad_h = int(shapes[i][1][1][1])
-		    pad_w = int(shapes[i][1][1][0])
-		    seg_mask_ = seg_mask_[pad_h:seg_mask_.shape[0]-pad_h, pad_w:seg_mask_.shape[1]-pad_w]
-		    seg_mask_ = cv2.resize(seg_mask_, dsize=shapes[i][0][::-1], interpolation=cv2.INTER_NEAREST)
-		    color_seg = np.zeros((seg_mask_.shape[0], seg_mask_.shape[1], 3), dtype=np.uint8)
-		    for index, seg_class in enumerate(params.seg_list):
-			    color_seg[seg_mask_ == index+1] = color_list_seg[seg_class]
-		    color_seg = color_seg[..., ::-1]  # RGB -> BGR
-		    # cv2.imwrite('seg_only_{}.jpg'.format(i), color_seg)
+		seg_mask_list.pop(0)
 
-		    color_mask = np.mean(color_seg, 2)  # (H, W, C) -> (H, W), check if any pixel is not background
-		    # prepare to show det on 2 different imgs
-		    # (with and without seg) -> (full and det_only)
-		    det_only_imgs.append(ori_imgs[i].copy())
-		    seg_img = ori_imgs[i].copy()  # do not work on original images if MULTILABEL_MODE
-		    seg_img[color_mask != 0] = seg_img[color_mask != 0] * 0.5 + color_seg[color_mask != 0] * 0.5
-		    seg_img = seg_img.astype(np.uint8)
-		    seg_filename = f'{output}/{i}_{params.seg_list[seg_class_index]}_seg.jpg' 
-		   
-		    cv2.imwrite(seg_filename, cv2.cvtColor(seg_img, cv2.COLOR_RGB2BGR))
+		# (B, W, H) -> (W, H)
+		for i in range(seg.size(0)):
+			#   print(i)
+			for seg_class_index, seg_mask in enumerate(seg_mask_list):
+				seg_mask_ = seg_mask[i].squeeze().cpu().numpy()
+				pad_h = int(shapes[i][1][1][1])
+				pad_w = int(shapes[i][1][1][0])
+				seg_mask_ = seg_mask_[pad_h:seg_mask_.shape[0]-pad_h, pad_w:seg_mask_.shape[1]-pad_w]
+				seg_mask_ = cv2.resize(seg_mask_, dsize=shapes[i][0][::-1], interpolation=cv2.INTER_NEAREST)
+				color_seg = np.zeros((seg_mask_.shape[0], seg_mask_.shape[1], 3), dtype=np.uint8)
+				for index, seg_class in enumerate(params.seg_list):
+					color_seg[seg_mask_ == index+1] = color_list_seg[seg_class]
+				color_seg = color_seg[..., ::-1]  # RGB -> BGR
+				# cv2.imwrite('seg_only_{}.jpg'.format(i), color_seg)
 
-	    regressBoxes = BBoxTransform()
-	    clipBoxes = ClipBoxes()
-	    out = postprocess(x,
-			      anchors, regression, classification,
-			      regressBoxes, clipBoxes,
-			      0.25, 0.3)
-	    show_det = True #Might change this
-	    imshow = False
-	    imwrite = True
-	    for i in range(len(ori_imgs)):
-		#print(i)
-		#cv2_imshow(ori_imgs[i])
-		out[i]['rois'] = scale_coords(ori_imgs[i][:2], out[i]['rois'], shapes[i][0], shapes[i][1])
-		for j in range(len(out[i]['rois'])):
-		    x1, y1, x2, y2 = out[i]['rois'][j].astype(int)
-		    obj = obj_list[out[i]['class_ids'][j]]
-		    score = float(out[i]['scores'][j])
-		    plot_one_box(ori_imgs[i], [x1, y1, x2, y2], label=obj, score=score,
-				 color=color_list[get_index_label(obj, obj_list)])
-		    #cv2_imshow(ori_imgs[i])
-		    if show_det:
-			plot_one_box(det_only_imgs[i], [x1, y1, x2, y2], label=obj, score=score,
-				     color=color_list[get_index_label(obj, obj_list)])
-		cv2_imshow(ori_imgs[i])
-		if show_det:
-		    cv2.imwrite(f'{output}/{i}_det.jpg',  cv2.cvtColor(det_only_imgs[i], cv2.COLOR_RGB2BGR))
+				color_mask = np.mean(color_seg, 2)  # (H, W, C) -> (H, W), check if any pixel is not background
+				# prepare to show det on 2 different imgs
+				# (with and without seg) -> (full and det_only)
+				det_only_imgs.append(ori_imgs[i].copy())
+				seg_img = ori_imgs[i].copy()  # do not work on original images if MULTILABEL_MODE
+				seg_img[color_mask != 0] = seg_img[color_mask != 0] * 0.5 + color_seg[color_mask != 0] * 0.5
+				seg_img = seg_img.astype(np.uint8)
+				seg_filename = f'{output}/{i}_{params.seg_list[seg_class_index]}_seg.jpg' 
 
-		if imshow:
-		    cv2.imshow('img', ori_imgs[i])
-		    cv2.waitKey(0)
+				cv2.imwrite(seg_filename, cv2.cvtColor(seg_img, cv2.COLOR_RGB2BGR))
 
-		if imwrite:
-		    cv2.imwrite(f'{output}/{i}.jpg', cv2.cvtColor(ori_imgs[i], cv2.COLOR_RGB2BGR))
-  
+		regressBoxes = BBoxTransform()
+		clipBoxes = ClipBoxes()
+		out = postprocess(x,
+		anchors, regression, classification,
+		regressBoxes, clipBoxes,
+		0.25, 0.3)
+		show_det = True #Might change this
+		imshow = False
+		imwrite = True
+		for i in range(len(ori_imgs)):
+			#print(i)
+			#cv2_imshow(ori_imgs[i])
+			out[i]['rois'] = scale_coords(ori_imgs[i][:2], out[i]['rois'], shapes[i][0], shapes[i][1])
+			for j in range(len(out[i]['rois'])):
+				x1, y1, x2, y2 = out[i]['rois'][j].astype(int)
+				obj = obj_list[out[i]['class_ids'][j]]
+				score = float(out[i]['scores'][j])
+				plot_one_box(ori_imgs[i], [x1, y1, x2, y2], label=obj, score=score, color=color_list[get_index_label(obj, obj_list)])
+				#cv2_imshow(ori_imgs[i])
+				if show_det:
+					plot_one_box(det_only_imgs[i], [x1, y1, x2, y2], label=obj, score=score, color=color_list[get_index_label(obj, obj_list)])
+			cv2_imshow(ori_imgs[i])
+			if show_det:
+				cv2.imwrite(f'{output}/{i}_det.jpg',  cv2.cvtColor(det_only_imgs[i], cv2.COLOR_RGB2BGR))
 
-    
-    
-    
-    
-    # end of copy paste
-    
-    
-    
-    
-    
-    
-    grayImageMsg = CvBridge().cv2_to_imgmsg(gray.astype(np.uint8))
-    #grayImageMsg.header = data.header
-    grayImageMsg.encoding = '8UC1'
-    grayImgPub.publish(grayImageMsg)
-    
-    
-  
+			if imshow:
+				cv2.imshow('img', ori_imgs[i])
+				cv2.waitKey(0)
+
+			if imwrite:
+				cv2.imwrite(f'{output}/{i}.jpg', cv2.cvtColor(ori_imgs[i], cv2.COLOR_RGB2BGR))
+
+
+
+
+
+
+	# end of copy paste
+
+
+
+
+
+
+	grayImageMsg = CvBridge().cv2_to_imgmsg(gray.astype(np.uint8))
+	#grayImageMsg.header = data.header
+	grayImageMsg.encoding = '8UC1'
+	grayImgPub.publish(grayImageMsg)
+
+
+
 
 rospy.init_node('img_record_node')
 rospy.Subscriber("/front_camera/image_raw", Image, callback_Img)
