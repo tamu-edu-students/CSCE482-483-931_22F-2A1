@@ -7,13 +7,32 @@ import numpy as np
 from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
 import torch
+import sys
+sys.path.insert(0, r'rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/scripts/HybridNets/')
 import time
 import cv2
 import torch
 import torchvision.transforms as T
-from PIL import Image
+import torch
+import time
+import cv2
+
+import time
+import torch
+from torch.backends import cudnn
+#from backbone import HybridNetsBackbone
+import cv2
+import numpy as np
 from glob import glob
-from google.colab.patches import cv2_imshow
+from HybridNets.utils.utils import letterbox, scale_coords, postprocess, BBoxTransform, ClipBoxes, restricted_float, \
+    boolean_string, Params
+from HybridNets.utils.plot import STANDARD_COLORS, standard_to_bgr, get_index_label, plot_one_box
+import os
+from torchvision import transforms
+import argparse
+from HybridNets.utils.constants import *
+from glob import glob
+#import cv2_imshow
 # load model
 model = torch.hub.load('datvuthanh/hybridnets', 'hybridnets', pretrained=True)
 torch.save(model.state_dict(), 'model_weights.pth')
@@ -24,7 +43,7 @@ model.requires_grad_(False) #Note: something about the training, recheck
 model.eval()
 color_list_seg = {}
 
-
+#print("check-point")
 #features, regression, classification, anchors, segmentation = model(img)
 #help(model.eval())
 #print(classification)
@@ -34,37 +53,43 @@ color_list_seg = {}
 #help(model._parameters)
 
 
-#rint("Khai is good")
+#print("Khai is good")
 bridge = CvBridge()
+print("check-point")
 def callback_Img(data):
-	print("Khai is good")
-	img = bridge.imgmsg_to_cv2(data, desired_encoding='rgb8')
-	print("Khai is good")
+	#print("got an image")
+	global bridge
+	#print("Khai is good")
+	try:
+		img = bridge.imgmsg_to_cv2(data, desired_encoding='rgb8')
+	except CvBridgeError as e:
+		print(e)
+	#print("Khai is insite")
 	# Start coordinate, here (5, 5)
 	# represents the top left corner of rectangle
-	start_point = (5, 5)
-
+	#start_point = (5, 5)
+	#cv2.imwrite(f'{output}/origin.jpg', img)
 	# Ending coordinate, here (220, 220)
 	# represents the bottom right corner of rectangle
-	end_point = (220, 220)
+	#end_point = (220, 220)
 
 	# Blue color in BGR
-	color = (255, 0, 0)
+	#color = (255, 0, 0)
 
 
 	# Line thickness of 2 px
-	thickness = 2
-	img = cv2.rectangle(img, start_point, end_point, color, thickness)
-	gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+	#thickness = 2
+	#img = cv2.rectangle(img, start_point, end_point, color, thickness)
+	#img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
 
 
 	# This is the lines of code from Hybridnets
 
 	# Initialization
-	params = Params(f'HybridNets/projects/bdd100k.yml')
+	params = Params(f'/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/scripts/bdd100k.yml')
 	input_imgs = []
 	shapes = []
-	output = '/content'
+	output = '/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/scripts/'
 	output = output[:-1]
 	# Might not need this in the ROS package
 	source = '/content'
@@ -99,11 +124,18 @@ def callback_Img(data):
 	seg_list = params.seg_list
 
 	color_list = standard_to_bgr(STANDARD_COLORS)
-	ori_imgs = [cv2.imread(i, cv2.IMREAD_COLOR | cv2.IMREAD_IGNORE_ORIENTATION) for i in img_path]
-	ori_imgs = [cv2.cvtColor(i, cv2.COLOR_BGR2RGB) for i in ori_imgs]
-	print(f"FOUND {len(ori_imgs)} IMAGES")
+	# ori_imgs = [cv2.imread(i, cv2.IMREAD_COLOR | cv2.IMREAD_IGNORE_ORIENTATION) for i in img_path] # Change
+	#ori_imgs = cv2.imread(img, cv2.IMREAD_COLOR | cv2.IMREAD_IGNORE_ORIENTATION)
+	
+	#img1 = cv2.imread(img, cv2.IMREAD_COLOR | cv2.IMREAD_IGNORE_ORIENTATION) 
+	#ori_imgs.append(img)
+	#ori_imgs = [cv2.cvtColor(i, cv2.COLOR_BGR2RGB) for i in ori_imgs]
+	ori_imgs = [cv2.cvtColor(img, cv2.COLOR_BGR2RGB)]
+	cv2.imwrite(f'{output}/i.jpg', ori_imgs[0])
+	#print(f"FOUND {len(ori_imgs)} IMAGES")
 	# cv2.imwrite('ori.jpg', ori_imgs[0])
 	# cv2.imwrite('normalized.jpg', normalized_imgs[0]*255)
+	#cv2.imwrite(f'test.jpg', ori_imgs[0])
 	resized_shape = params.model['image_size']
 	if isinstance(resized_shape, list):
 		resized_shape = max(resized_shape)
@@ -143,7 +175,7 @@ def callback_Img(data):
 			seg_mode = MULTILABEL_MODE
 		else:
 			seg_mode = MULTICLASS_MODE
-	print("DETECTED SEGMENTATION MODE FROM WEIGHT AND PROJECT FILE:", seg_mode)
+	#print("DETECTED SEGMENTATION MODE FROM WEIGHT AND PROJECT FILE:", seg_mode)
 
 	model.load_state_dict(weight)
 
@@ -187,6 +219,7 @@ def callback_Img(data):
 				seg_filename = f'{output}/{i}_{params.seg_list[seg_class_index]}_seg.jpg' 
 
 				cv2.imwrite(seg_filename, cv2.cvtColor(seg_img, cv2.COLOR_RGB2BGR))
+				seg_img = seg_img.astype(np.uint8)
 
 		regressBoxes = BBoxTransform()
 		clipBoxes = ClipBoxes()
@@ -207,9 +240,14 @@ def callback_Img(data):
 				score = float(out[i]['scores'][j])
 				plot_one_box(ori_imgs[i], [x1, y1, x2, y2], label=obj, score=score, color=color_list[get_index_label(obj, obj_list)])
 				#cv2_imshow(ori_imgs[i])
+				#grayImageMsg = CvBridge().cv2_to_imgmsg(ori_imgs[i].astype(np.uint8))
+	#grayImageMsg.header = data.header
+				#grayImageMsg.encoding = '8UC1'
+				#grayImgPub.publish(grayImageMsg)
+
 				if show_det:
 					plot_one_box(det_only_imgs[i], [x1, y1, x2, y2], label=obj, score=score, color=color_list[get_index_label(obj, obj_list)])
-			cv2_imshow(ori_imgs[i])
+			#cv2.imshow(ori_imgs[i])
 			if show_det:
 				cv2.imwrite(f'{output}/{i}_det.jpg',  cv2.cvtColor(det_only_imgs[i], cv2.COLOR_RGB2BGR))
 
@@ -219,9 +257,20 @@ def callback_Img(data):
 
 			if imwrite:
 				cv2.imwrite(f'{output}/{i}.jpg', cv2.cvtColor(ori_imgs[i], cv2.COLOR_RGB2BGR))
+	gray = cv2.cvtColor(ori_imgs[0], cv2.COLOR_RGB2BGR)
+	#cv2.imwrite(f'{output}/{i}.jpg', cv2.cvtColor(gray, cv2.COLOR_RGB2BGR))
+	#print("check-point")
+	# cv2.imshow('img',gray)
+	
+	grayImageMsg = CvBridge().cv2_to_imgmsg(gray.astype(np.uint8)) #change
+	grayImageMsg.header = data.header
+	grayImageMsg.encoding = '8UC1' #Change
+	grayImgPub.publish(grayImageMsg) #Change
 
 
 
+
+	
 
 
 
@@ -230,17 +279,13 @@ def callback_Img(data):
 
 
 
-
-
-	grayImageMsg = CvBridge().cv2_to_imgmsg(gray.astype(np.uint8))
-	#grayImageMsg.header = data.header
-	grayImageMsg.encoding = '8UC1'
-	grayImgPub.publish(grayImageMsg)
-
+	
 
 
 
 rospy.init_node('img_record_node')
 rospy.Subscriber("/front_camera/image_raw", Image, callback_Img)
+#print("check")
 grayImgPub = rospy.Publisher('/img_gray', Image, queue_size=10)
+#print("check2")
 rospy.spin()
