@@ -1,9 +1,9 @@
-IMAGE_ID = i0x0i/foxy-noetic
-CONTAINERID_ID = ADC_II-Dev
+IMAGE_ID = ghcr.io/ojasonbernal/2a1-package:latest
+CONTAINERID_ID = 2a1-package
 
 #Initialize container from image
 init:
-	sudo docker run --name $(CONTAINERID_ID) -it -v `pwd`/rootfs:/root/rootfs -p 6080:6080 $(IMAGE_ID)
+	sudo docker run --name $(CONTAINERID_ID) -it -v `pwd`/rootfs:/root/rootfs -p 6081:6081 $(IMAGE_ID)
 	#Use the following line for Matlab-ROS connection in Windows/Mac
 	#sudo docker run --name $(CONTAINERID_ID) -it -v `pwd`/rootfs:/root/rootfs -p 6080:6080 -p 11311:11311 -p 40000-40100:40000-40100 --sysctl net.ipv4.ip_local_port_range="40000 40100" $(IMAGE_ID)
 	#Use the following line in Linux only
