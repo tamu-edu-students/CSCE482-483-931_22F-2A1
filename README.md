@@ -15,17 +15,72 @@
   </p> -->
 </p>
 
+## About the Project
+todo
+
 ### Objectives: 
 * Evaluate existing detection framework on our dataset
 * Integrate existing detection framework with ROS/ROS2
 * Input: image, Output: bounding boxes/classification results
 
-### Contributors:
+
+## Prerequisites
+* Operating System: Mac, Linux, or Windows
+* Docker [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/)
+* GitHub Account [https://github.com/join](https://github.com/join)
+
+
+## Getting Started
+Clone the repository:
+
+```bash
+git clone https://github.com/tamu-edu-students/CSCE482-483-931_22F-2A1
+cd CSCE482-483-931_22F-2A1
+```
+
+Initialize the latest Docker container from image
+```bash
+make init
+```
+
+
+
+### Useful Commands  (For Development Purposes Only)
+If a package already exists with the name 2a1-package, you can remove it using the following command:
+```bash
+make rm
+```
+
+If updating Dockerfile, use the following command to build your own image:
+```bash
+make build
+```
+
+You can also pull the latest Docker package using the following command:
+```bash
+docker pull ghcr.io/ojasonbernal/2a1-package:latest
+```
+
+### Disclaimer: 
+Unable to associate GitHub Docker Package to repository due to restrictions from tamu-edu-students organization. \
+Docker Package can be found here:
+[https://github.com/users/ojasonbernal/packages/container/package/2a1-package](https://github.com/users/ojasonbernal/packages/container/package/2a1-package)
+
+## Contributors:
 Team Name: OLD482
-* Pavan Poladi
-* Khai Nguyen
-* Viet Nguyen
-* Jason Bernal
+* Pavan Poladi [https://github.com/pavanpoladi](https://github.com/pavanpoladi)
+* Khai Nguyen [https://github.com/Khaihuyennguyen](https://github.com/Khaihuyennguyen)
+* Viet Nguyen [https://github.com/vivelaviet](https://github.com/vivelaviet)
+* Jason Bernal [https://github.com/ojasonbernal](https://github.com/ojasonbernal)
+
+
+## License
+todo
+
+## Acknowledgements:
+* [HybridNets](https://github.com/datvuthanh/HybridNets)
+* [Darknet-ROS](https://github.com/leggedrobotics/darknet_ros)
+* [ROS-Docker-Intro](https://github.com/tamu-edu-students/ROS-Docker-Intro)
 
 
 ### Resources Used:
