@@ -21,7 +21,12 @@ RUN apt-get update && \
     printf "lxpanel &\n sleep 3 \n openbox-session" >.xinit && \
     chmod 777 /root/*.sh /root/.xinit
 
-# ROS Setup
+# ROS + HybridNets Setup
 RUN apt-get update && \
-    echo "source /root/noetic_setup.sh" >> .bashrc && \
-    echo "echo "Worked"" >> .bashrc
+    apt-get -y install \
+    # Installing Python3 Pip
+    python3-pip && \
+    # echo "echo "Worked"" >> .bashrc
+    # Installing dependancies for 
+    pip install -qr https://raw.githubusercontent.com/datvuthanh/HybridNets/main/requirements.txt && \
+    echo "source /root/noetic_setup.sh" >> .bashrc
