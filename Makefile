@@ -10,6 +10,7 @@ init:
 	#sudo docker run --name $(CONTAINERID_ID) -it -v `pwd`/rootfs:/root/rootfs --network host $(IMAGE_ID)
 
 #Build image
+# --no-cache flag is used to rebuild the entire environment
 build:
 	sudo docker build --tag=$(IMAGE_ID) .
 

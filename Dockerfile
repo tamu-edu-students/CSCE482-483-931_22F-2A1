@@ -21,12 +21,44 @@ RUN apt-get update && \
     printf "lxpanel &\n sleep 3 \n openbox-session" >.xinit && \
     chmod 777 /root/*.sh /root/.xinit
 
-# ROS + HybridNets Setup
+# HybridNets Setup
 RUN apt-get update && \
     apt-get -y install \
     # Installing Python3 Pip
     python3-pip && \
     # echo "echo "Worked"" >> .bashrc
     # Installing dependancies for 
-    pip install -qr https://raw.githubusercontent.com/datvuthanh/HybridNets/main/requirements.txt && \
-    echo "source /root/noetic_setup.sh" >> .bashrc
+    pip install -qr https://raw.githubusercontent.com/datvuthanh/HybridNets/main/requirements.txt
+
+# Cloning Repo and using latest rootfs folder
+RUN apt-get update && \
+    git clone https://github.com/tamu-edu-students/CSCE482-483-931_22F-2A1.git && \
+    mv CSCE482-483-931_22F-2A1/rootfs rootfs && \
+    rm -rf CSCE482-483-931_22F-2A1
+
+# ROS Setup
+# To cd into a directory, do not use command "cd". Use WORKDIR as that is best practice
+RUN echo "source /root/noetic_setup.sh" >> .bashrc 
+WORKDIR /root/rootfs/rootfs/catkin_ws/devel
+RUN echo "source setup.bash" >> .bashrc
+WORKDIR /root/rootfs/rootfs/catkin_ws
+RUN echo "catkin_make" >> .bashrc
+WORKDIR /root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/scripts
+# CMD ["rm -rf HybridNets","git clone https://github.com/datvuthanh/HybridNets"]
+RUN rm -rf HybridNets && \
+    git clone https://github.com/datvuthanh/HybridNets
+# WORKDIR /root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/scripts/HybridNets
+# RUN echo "ls" >> .bashrc
+WORKDIR /root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/scripts
+RUN echo "python3 image_subscriber.py" >> .bashrc
+
+# RUN echo "rosrun ros_basics_tutorials image_subscriber.py" >> .bashrc
+
+
+
+
+# /root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/scripts
+
+
+# WORKDIR /root
+
