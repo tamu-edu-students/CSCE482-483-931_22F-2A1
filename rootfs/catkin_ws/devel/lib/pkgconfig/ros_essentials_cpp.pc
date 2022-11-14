@@ -1,8 +1,0 @@
-prefix=/root/rootfs/rootfs/catkin_ws/devel
-
-Name: ros_essentials_cpp
-Description: Description of ros_essentials_cpp
-Version: 0.0.0
-Cflags: -I/root/rootfs/rootfs/catkin_ws/devel/include -I/root/rootfs/rootfs/catkin_ws/src/ros_essentials_cpp/include
-Libs: -L${prefix}/lib -lros_essentials_cpp
-Requires: roscpp rospy std_msgs message_runtime
