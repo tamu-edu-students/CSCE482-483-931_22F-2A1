@@ -132,7 +132,6 @@ if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   include("/root/rootfs/rootfs/catkin_ws/build/gtest/cmake_install.cmake")
   include("/root/rootfs/rootfs/catkin_ws/build/ros_basics_tutorials/cmake_install.cmake")
-  include("/root/rootfs/rootfs/catkin_ws/build/ros_essentials_cpp/cmake_install.cmake")
 
 endif()
 
