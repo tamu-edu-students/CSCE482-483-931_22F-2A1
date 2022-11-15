@@ -53,7 +53,7 @@ color_list_seg = {}
 #help(model._parameters)
 
 
-#print("Khai is good")
+print("Python version", sys.version )
 bridge = CvBridge()
 print("check-point")
 def callback_Img(data):
@@ -266,7 +266,7 @@ def callback_Img(data):
 	grayImageMsg.header = data.header
 	grayImageMsg.encoding = '8UC1' #Change
 	grayImgPub.publish(grayImageMsg) #Change
-
+	
 
 
 
