@@ -1,3 +1,3 @@
-[submodule "rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/scripts/HybridNets"]
-	path = rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/scripts/HybridNets
+[submodule "rootfs/catkin_ws/src/ros_basics_tutorials/scripts/HybridNets"]
+	path = rootfs/catkin_ws/src/ros_basics_tutorials/scripts/HybridNets
 	url = https://github.com/datvuthanh/HybridNets.git
