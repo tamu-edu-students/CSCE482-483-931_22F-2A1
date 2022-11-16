@@ -11,8 +11,10 @@ init:
 
 #Build image
 # --no-cache flag is used to rebuild the entire environment
+# docker build --build-arg CACHE_BUST=$(date +%s) .
+
 build:
-	sudo docker build --tag=$(IMAGE_ID) .
+	sudo docker build --build-arg CACHE_BUST=$(date +%s) --tag=$(IMAGE_ID) .
 
 #Run initialized container
 run:

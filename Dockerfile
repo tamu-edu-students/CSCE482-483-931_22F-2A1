@@ -38,6 +38,7 @@ RUN apt-get update && \
 
 # ROS Setup
 # To cd into a directory, do not use command "cd". Use WORKDIR as that is best practice
+ARG CACHE_BUST
 RUN echo "source /root/noetic_setup.sh" >> .bashrc 
 WORKDIR /root/rootfs/rootfs/catkin_ws/devel
 RUN echo "source setup.bash" >> .bashrc
@@ -45,12 +46,20 @@ WORKDIR /root/rootfs/rootfs/catkin_ws
 RUN echo "catkin_make" >> .bashrc
 WORKDIR /root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/scripts
 # CMD ["rm -rf HybridNets","git clone https://github.com/datvuthanh/HybridNets"]
-RUN rm -rf HybridNets && \
-    git clone https://github.com/datvuthanh/HybridNets
+# RUN rm -rf HybridNets && \
+#     git clone https://github.com/datvuthanh/HybridNets
+# COPY . .
+
 # WORKDIR /root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/scripts/HybridNets
 # RUN echo "ls" >> .bashrc
-WORKDIR /root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/scripts
+# WORKDIR /root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/scripts
+RUN echo "roscore & ros_basics_tutorials image_subscriber.py" >> .bashrc
+# Example: 
 RUN echo "python3 image_subscriber.py" >> .bashrc
+
+# CMD ["python3", "image_subscriber.py"]
+# RUN echo "" >> .bashrc
+
 
 # RUN echo "rosrun ros_basics_tutorials image_subscriber.py" >> .bashrc
 
