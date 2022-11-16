@@ -65,8 +65,8 @@ ros_basics_tutorials/CMakeFiles/ros_basics_tutorials_generate_messages_nodejs: /
 
 /root/rootfs/rootfs/catkin_ws/devel/share/gennodejs/ros/ros_basics_tutorials/msg/BoundingBoxes.js: /opt/ros/noetic/lib/gennodejs/gen_nodejs.py
 /root/rootfs/rootfs/catkin_ws/devel/share/gennodejs/ros/ros_basics_tutorials/msg/BoundingBoxes.js: /root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg
-/root/rootfs/rootfs/catkin_ws/devel/share/gennodejs/ros/ros_basics_tutorials/msg/BoundingBoxes.js: /root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg
 /root/rootfs/rootfs/catkin_ws/devel/share/gennodejs/ros/ros_basics_tutorials/msg/BoundingBoxes.js: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/root/rootfs/rootfs/catkin_ws/devel/share/gennodejs/ros/ros_basics_tutorials/msg/BoundingBoxes.js: /root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/root/rootfs/rootfs/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Javascript code from ros_basics_tutorials/BoundingBoxes.msg"
 	cd /root/rootfs/rootfs/catkin_ws/build/ros_basics_tutorials && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/gennodejs/cmake/../../../lib/gennodejs/gen_nodejs.py /root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg -Iros_basics_tutorials:/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p ros_basics_tutorials -o /root/rootfs/rootfs/catkin_ws/devel/share/gennodejs/ros/ros_basics_tutorials/msg
 

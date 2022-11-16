@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /root/rootfs/rootfs/catkin_ws/build
 include ros_basics_tutorials/CMakeFiles/_ros_basics_tutorials_generate_messages_check_deps_BoundingBoxes.dir/progress.make
 
 ros_basics_tutorials/CMakeFiles/_ros_basics_tutorials_generate_messages_check_deps_BoundingBoxes:
-	cd /root/rootfs/rootfs/catkin_ws/build/ros_basics_tutorials && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py ros_basics_tutorials /root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg ros_basics_tutorials/BoundingBox:std_msgs/Header
+	cd /root/rootfs/rootfs/catkin_ws/build/ros_basics_tutorials && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py ros_basics_tutorials /root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg std_msgs/Header:ros_basics_tutorials/BoundingBox
 
 _ros_basics_tutorials_generate_messages_check_deps_BoundingBoxes: ros_basics_tutorials/CMakeFiles/_ros_basics_tutorials_generate_messages_check_deps_BoundingBoxes
 _ros_basics_tutorials_generate_messages_check_deps_BoundingBoxes: ros_basics_tutorials/CMakeFiles/_ros_basics_tutorials_generate_messages_check_deps_BoundingBoxes.dir/build.make

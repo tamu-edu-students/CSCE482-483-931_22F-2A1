@@ -66,8 +66,8 @@ ros_basics_tutorials/CMakeFiles/ros_basics_tutorials_generate_messages_py: /root
 
 /root/rootfs/rootfs/catkin_ws/devel/lib/python3/dist-packages/ros_basics_tutorials/msg/_BoundingBoxes.py: /opt/ros/noetic/lib/genpy/genmsg_py.py
 /root/rootfs/rootfs/catkin_ws/devel/lib/python3/dist-packages/ros_basics_tutorials/msg/_BoundingBoxes.py: /root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg
-/root/rootfs/rootfs/catkin_ws/devel/lib/python3/dist-packages/ros_basics_tutorials/msg/_BoundingBoxes.py: /root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg
 /root/rootfs/rootfs/catkin_ws/devel/lib/python3/dist-packages/ros_basics_tutorials/msg/_BoundingBoxes.py: /opt/ros/noetic/share/std_msgs/msg/Header.msg
+/root/rootfs/rootfs/catkin_ws/devel/lib/python3/dist-packages/ros_basics_tutorials/msg/_BoundingBoxes.py: /root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --blue --bold --progress-dir=/root/rootfs/rootfs/catkin_ws/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Generating Python from MSG ros_basics_tutorials/BoundingBoxes"
 	cd /root/rootfs/rootfs/catkin_ws/build/ros_basics_tutorials && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genpy/cmake/../../../lib/genpy/genmsg_py.py /root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg -Iros_basics_tutorials:/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg -Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg -p ros_basics_tutorials -o /root/rootfs/rootfs/catkin_ws/devel/lib/python3/dist-packages/ros_basics_tutorials/msg
 
