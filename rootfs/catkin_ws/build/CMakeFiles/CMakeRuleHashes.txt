@@ -1,4 +1,7 @@
 # Hashes of file build rules.
+fe6bcb65390a1d704bf2830e3b72186a /root/rootfs/rootfs/catkin_ws/devel/include/ros_basics_tutorials/BoundingBox.h
+89d91ae6e39df5643e0e9aa52106d2ca /root/rootfs/rootfs/catkin_ws/devel/include/ros_basics_tutorials/BoundingBoxes.h
+219415ac80160eac6341bd4c3b50319d /root/rootfs/rootfs/catkin_ws/devel/include/ros_basics_tutorials/ObjectCount.h
 3ff96a890a7af503b58041d008658ff9 /root/rootfs/rootfs/catkin_ws/devel/include/ros_essentials_cpp/AddTwoInts.h
 c8c03c80bae60a02f950b7b41444b7c2 /root/rootfs/rootfs/catkin_ws/devel/include/ros_essentials_cpp/FibonacciAction.h
 aa1aea7cb3fc210944a6182d7ed11448 /root/rootfs/rootfs/catkin_ws/devel/include/ros_essentials_cpp/FibonacciActionFeedback.h
@@ -8,6 +11,10 @@ e4694bcd5773b8cdcbf7da772cb06946 /root/rootfs/rootfs/catkin_ws/devel/include/ros
 c799c06025c064404c5ac9d4576840ff /root/rootfs/rootfs/catkin_ws/devel/include/ros_essentials_cpp/FibonacciGoal.h
 43d9c427ef1c759f282a31378fd3d401 /root/rootfs/rootfs/catkin_ws/devel/include/ros_essentials_cpp/FibonacciResult.h
 b3bc8d065ea88c01d78fe7f01382d28d /root/rootfs/rootfs/catkin_ws/devel/include/ros_essentials_cpp/IoTSensor.h
+65cf4f679a475a862a34c17d0831dc9d /root/rootfs/rootfs/catkin_ws/devel/lib/python3/dist-packages/ros_basics_tutorials/msg/_BoundingBox.py
+91b3cc6bbd8c0d3ea810519064f83e24 /root/rootfs/rootfs/catkin_ws/devel/lib/python3/dist-packages/ros_basics_tutorials/msg/_BoundingBoxes.py
+ab191886fe8330672ddb3e8fad9761ae /root/rootfs/rootfs/catkin_ws/devel/lib/python3/dist-packages/ros_basics_tutorials/msg/_ObjectCount.py
+1464fe6cc0e437f6e4b284905276ae3b /root/rootfs/rootfs/catkin_ws/devel/lib/python3/dist-packages/ros_basics_tutorials/msg/__init__.py
 8b1edf71b33f851042b31f7d8a1d24c2 /root/rootfs/rootfs/catkin_ws/devel/lib/python3/dist-packages/ros_essentials_cpp/msg/_FibonacciAction.py
 b677d0099e747ac87b7575e1dbddf6c3 /root/rootfs/rootfs/catkin_ws/devel/lib/python3/dist-packages/ros_essentials_cpp/msg/_FibonacciActionFeedback.py
 e5876967e61f537e2b70f5ef211ab38a /root/rootfs/rootfs/catkin_ws/devel/lib/python3/dist-packages/ros_essentials_cpp/msg/_FibonacciActionGoal.py
@@ -19,6 +26,9 @@ a27909171c1fa23b39afa25339c2d1fc /root/rootfs/rootfs/catkin_ws/devel/lib/python3
 1f1e5a4186c5482adfa22ba1c394e44f /root/rootfs/rootfs/catkin_ws/devel/lib/python3/dist-packages/ros_essentials_cpp/msg/__init__.py
 fa20471ca0b3dda1fa8c42e75028801b /root/rootfs/rootfs/catkin_ws/devel/lib/python3/dist-packages/ros_essentials_cpp/srv/_AddTwoInts.py
 3a30a0fdd85ba794c6154c827199a7bf /root/rootfs/rootfs/catkin_ws/devel/lib/python3/dist-packages/ros_essentials_cpp/srv/__init__.py
+27d32b5d28ed35bceb11e27e8a89a5ef /root/rootfs/rootfs/catkin_ws/devel/share/common-lisp/ros/ros_basics_tutorials/msg/BoundingBox.lisp
+c9ae6b365d07644435c6543cf8e97adb /root/rootfs/rootfs/catkin_ws/devel/share/common-lisp/ros/ros_basics_tutorials/msg/BoundingBoxes.lisp
+c937f81a8c78464877f9edda58d91445 /root/rootfs/rootfs/catkin_ws/devel/share/common-lisp/ros/ros_basics_tutorials/msg/ObjectCount.lisp
 3f1e9c8c6513de42ce303650662e13a0 /root/rootfs/rootfs/catkin_ws/devel/share/common-lisp/ros/ros_essentials_cpp/msg/FibonacciAction.lisp
 59d573880da70a033af99eb6d8e20881 /root/rootfs/rootfs/catkin_ws/devel/share/common-lisp/ros/ros_essentials_cpp/msg/FibonacciActionFeedback.lisp
 a31fba9d2c5262080e0a34c6e2546c12 /root/rootfs/rootfs/catkin_ws/devel/share/common-lisp/ros/ros_essentials_cpp/msg/FibonacciActionGoal.lisp
@@ -28,6 +38,9 @@ e847d8ba2b06f556d2f7a211081d4a20 /root/rootfs/rootfs/catkin_ws/devel/share/commo
 8f42334aa33f8a8f8d781ce438f1645e /root/rootfs/rootfs/catkin_ws/devel/share/common-lisp/ros/ros_essentials_cpp/msg/FibonacciResult.lisp
 318a301c804b45e9e2f848b6edc482b8 /root/rootfs/rootfs/catkin_ws/devel/share/common-lisp/ros/ros_essentials_cpp/msg/IoTSensor.lisp
 11b7b440c9fcad81f1d126ed59e0956b /root/rootfs/rootfs/catkin_ws/devel/share/common-lisp/ros/ros_essentials_cpp/srv/AddTwoInts.lisp
+bdcfd38c503c9af1bd1abf0875fe654a /root/rootfs/rootfs/catkin_ws/devel/share/gennodejs/ros/ros_basics_tutorials/msg/BoundingBox.js
+cc116461ac101470ec5169f331abcf81 /root/rootfs/rootfs/catkin_ws/devel/share/gennodejs/ros/ros_basics_tutorials/msg/BoundingBoxes.js
+7e475f3a600905fa178ff627c87a627a /root/rootfs/rootfs/catkin_ws/devel/share/gennodejs/ros/ros_basics_tutorials/msg/ObjectCount.js
 e0a12598ec56535e3ed339d6801768e4 /root/rootfs/rootfs/catkin_ws/devel/share/gennodejs/ros/ros_essentials_cpp/msg/FibonacciAction.js
 9730e0a91231b33500e2fb82b5cb3cea /root/rootfs/rootfs/catkin_ws/devel/share/gennodejs/ros/ros_essentials_cpp/msg/FibonacciActionFeedback.js
 d63ef18df82f39fd6bd422cdb05a8984 /root/rootfs/rootfs/catkin_ws/devel/share/gennodejs/ros/ros_essentials_cpp/msg/FibonacciActionGoal.js
@@ -37,6 +50,10 @@ d63ef18df82f39fd6bd422cdb05a8984 /root/rootfs/rootfs/catkin_ws/devel/share/genno
 a3429b392f3bc994d6916833767698a4 /root/rootfs/rootfs/catkin_ws/devel/share/gennodejs/ros/ros_essentials_cpp/msg/FibonacciResult.js
 c3e3b8d9ef48b0db8691a9893157bcbe /root/rootfs/rootfs/catkin_ws/devel/share/gennodejs/ros/ros_essentials_cpp/msg/IoTSensor.js
 6e592245044a4fe6aab80de08dbee600 /root/rootfs/rootfs/catkin_ws/devel/share/gennodejs/ros/ros_essentials_cpp/srv/AddTwoInts.js
+6deec88c89efabe7009634908886fc63 /root/rootfs/rootfs/catkin_ws/devel/share/roseus/ros/ros_basics_tutorials/manifest.l
+fb03807568fb8e71e7fd9e5f15d18b7b /root/rootfs/rootfs/catkin_ws/devel/share/roseus/ros/ros_basics_tutorials/msg/BoundingBox.l
+dd61beaa290703b26a023fd4a3576827 /root/rootfs/rootfs/catkin_ws/devel/share/roseus/ros/ros_basics_tutorials/msg/BoundingBoxes.l
+bafaf32824f53a4aa96139a70d1011e5 /root/rootfs/rootfs/catkin_ws/devel/share/roseus/ros/ros_basics_tutorials/msg/ObjectCount.l
 ba5eef9f98d0365c26b3f9e4deea5e61 /root/rootfs/rootfs/catkin_ws/devel/share/roseus/ros/ros_essentials_cpp/manifest.l
 180a9efadae64946768e1527177b67a5 /root/rootfs/rootfs/catkin_ws/devel/share/roseus/ros/ros_essentials_cpp/msg/FibonacciAction.l
 f88c1ddc398a89c032493cc18d03a871 /root/rootfs/rootfs/catkin_ws/devel/share/roseus/ros/ros_essentials_cpp/msg/FibonacciActionFeedback.l
@@ -48,3 +65,11 @@ f88c1ddc398a89c032493cc18d03a871 /root/rootfs/rootfs/catkin_ws/devel/share/roseu
 b577e13ab7205f090cc1680c23b01556 /root/rootfs/rootfs/catkin_ws/devel/share/roseus/ros/ros_essentials_cpp/msg/IoTSensor.l
 f06d036b15ce92ebb1dd999082625dc6 /root/rootfs/rootfs/catkin_ws/devel/share/roseus/ros/ros_essentials_cpp/srv/AddTwoInts.l
 c79f7355589dcb4db3baa2d2a4de1451 CMakeFiles/clean_test_results
+13115c3035c862a8b610b86d1fdcba1c ros_basics_tutorials/CMakeFiles/_ros_basics_tutorials_generate_messages_check_deps_BoundingBox
+eabcbd45233c50345c1da90c053ceeb5 ros_basics_tutorials/CMakeFiles/_ros_basics_tutorials_generate_messages_check_deps_BoundingBoxes
+69fe823e3b92dffb3f04cdb59767aa48 ros_basics_tutorials/CMakeFiles/_ros_basics_tutorials_generate_messages_check_deps_ObjectCount
+041e149cc5e790c7a06b37d255233f10 ros_basics_tutorials/CMakeFiles/ros_basics_tutorials_generate_messages_cpp
+041e149cc5e790c7a06b37d255233f10 ros_basics_tutorials/CMakeFiles/ros_basics_tutorials_generate_messages_eus
+041e149cc5e790c7a06b37d255233f10 ros_basics_tutorials/CMakeFiles/ros_basics_tutorials_generate_messages_lisp
+041e149cc5e790c7a06b37d255233f10 ros_basics_tutorials/CMakeFiles/ros_basics_tutorials_generate_messages_nodejs
+041e149cc5e790c7a06b37d255233f10 ros_basics_tutorials/CMakeFiles/ros_basics_tutorials_generate_messages_py

@@ -91,9 +91,9 @@ endif()
 # flag project as catkin-based to distinguish if a find_package()-ed project is a catkin project
 set(ros_basics_tutorials_FOUND_CATKIN_PROJECT TRUE)
 
-if(NOT " " STREQUAL " ")
+if(NOT "/root/rootfs/rootfs/catkin_ws/devel/include;/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/include " STREQUAL " ")
   set(ros_basics_tutorials_INCLUDE_DIRS "")
-  set(_include_dirs "")
+  set(_include_dirs "/root/rootfs/rootfs/catkin_ws/devel/include;/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/include")
   if(NOT " " STREQUAL " ")
     set(_report "Check the issue tracker '' and consider creating a ticket if the problem has not been reported yet.")
   elseif(NOT " " STREQUAL " ")
@@ -116,7 +116,7 @@ if(NOT " " STREQUAL " ")
   endforeach()
 endif()
 
-set(libraries "")
+set(libraries "ros_basics_tutorials")
 foreach(library ${libraries})
   # keep build configuration keywords, target names and absolute libraries as-is
   if("${library}" MATCHES "^(debug|optimized|general)$")
@@ -177,7 +177,7 @@ foreach(library ${libraries})
   endif()
 endforeach()
 
-set(ros_basics_tutorials_EXPORTED_TARGETS "")
+set(ros_basics_tutorials_EXPORTED_TARGETS "ros_basics_tutorials_generate_messages_cpp;ros_basics_tutorials_generate_messages_eus;ros_basics_tutorials_generate_messages_lisp;ros_basics_tutorials_generate_messages_nodejs;ros_basics_tutorials_generate_messages_py")
 # create dummy targets for exported code generation targets to make life of users easier
 foreach(t ${ros_basics_tutorials_EXPORTED_TARGETS})
   if(NOT TARGET ${t})
@@ -185,7 +185,7 @@ foreach(t ${ros_basics_tutorials_EXPORTED_TARGETS})
   endif()
 endforeach()
 
-set(depends "")
+set(depends "roscpp;rospy;std_msgs")
 foreach(depend ${depends})
   string(REPLACE " " ";" depend_list ${depend})
   # the package name of the dependency must be kept in a unique variable so that it is not overwritten in recursive calls
@@ -214,7 +214,7 @@ foreach(depend ${depends})
   _list_append_deduplicate(ros_basics_tutorials_EXPORTED_TARGETS ${${ros_basics_tutorials_dep}_EXPORTED_TARGETS})
 endforeach()
 
-set(pkg_cfg_extras "")
+set(pkg_cfg_extras "ros_basics_tutorials-msg-extras.cmake")
 foreach(extra ${pkg_cfg_extras})
   if(NOT IS_ABSOLUTE ${extra})
     set(extra ${ros_basics_tutorials_DIR}/${extra})

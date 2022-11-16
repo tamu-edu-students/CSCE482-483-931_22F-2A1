@@ -32,8 +32,10 @@ from torchvision import transforms
 import argparse
 from HybridNets.utils.constants import *
 from glob import glob
-from ros_basics_tutorials.msg import BoundingBox, BoundingBoxes, ObjectCount
+#from ros_basics_tutorials.msg import BoundingBox, BoundingBoxes, ObjectCount
 #import cv2_imshow
+
+#boxes = BoundingBoxes();
 # load model
 model = torch.hub.load('datvuthanh/hybridnets', 'hybridnets', pretrained=True)
 torch.save(model.state_dict(), 'model_weights.pth')
@@ -240,7 +242,27 @@ def callback_Img(data):
 				obj = obj_list[out[i]['class_ids'][j]]
 				score = float(out[i]['scores'][j])
 				plot_one_box(ori_imgs[i], [x1, y1, x2, y2], label=obj, score=score, color=color_list[get_index_label(obj, obj_list)])
-				#cv2_imshow(ori_imgs[i])
+				
+				#Add to BoundingBoxes
+				#box = BoundingBox()
+				#box.xmin = x1
+				#box.xmax = x2
+				#box.ymin = y1
+				#box.ymax = y2
+				#box.id = j
+				#box.probability = score
+				#box.Class = obj
+				#boxes.bounding_boxes.append(box)
+				
+				#print(box.xmin)
+				#print(box.xmax)
+				#print(box.ymin)
+				#print(box.ymax)
+				#print(box.id)
+				#print(box.probability)
+				#print(box.Class) 
+
+                               #cv2_imshow(ori_imgs[i])
 				#grayImageMsg = CvBridge().cv2_to_imgmsg(ori_imgs[i].astype(np.uint8))
 	#grayImageMsg.header = data.header
 				#grayImageMsg.encoding = '8UC1'

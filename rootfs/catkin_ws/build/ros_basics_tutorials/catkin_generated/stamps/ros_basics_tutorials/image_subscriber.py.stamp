@@ -32,6 +32,7 @@ from torchvision import transforms
 import argparse
 from HybridNets.utils.constants import *
 from glob import glob
+from ros_basics_tutorial.msg import BoundingBox, BoundingBoxes, ObjectCount
 #import cv2_imshow
 # load model
 model = torch.hub.load('datvuthanh/hybridnets', 'hybridnets', pretrained=True)
@@ -53,7 +54,7 @@ color_list_seg = {}
 #help(model._parameters)
 
 
-print("Python version", sys.version )
+#print("Khai is good")
 bridge = CvBridge()
 print("check-point")
 def callback_Img(data):
@@ -266,7 +267,7 @@ def callback_Img(data):
 	grayImageMsg.header = data.header
 	grayImageMsg.encoding = '8UC1' #Change
 	grayImgPub.publish(grayImageMsg) #Change
-	
+
 
 
 
@@ -289,3 +290,4 @@ rospy.Subscriber("/front_camera/image_raw", Image, callback_Img)
 grayImgPub = rospy.Publisher('/img_gray', Image, queue_size=10)
 #print("check2")
 rospy.spin()
+
