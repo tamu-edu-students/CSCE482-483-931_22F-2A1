@@ -7,7 +7,7 @@
 
 <p align="center">
   <a>
-    <img src="logo.png" alt="Team Logo" width="300" height="auto">
+    <img src="Reports/Assets/logo.png" alt="Team Logo" width="300" height="auto">
   </a>
   <h3 align="center">2A1. Traffic Object/Lane Detection</h3>
   <!-- <p align="center">
