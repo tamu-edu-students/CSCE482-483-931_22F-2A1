@@ -210,7 +210,7 @@ def callback_Img(data):
 				for index, seg_class in enumerate(params.seg_list):
 					color_seg[seg_mask_ == index+1] = color_list_seg[seg_class]
 				color_seg = color_seg[..., ::-1]  # RGB -> BGR
-				# cv2.imwrite('seg_only_{}.jpg'.format(i), color_seg)
+				#cv2.imwrite('seg_test_only_{}.jpg'.format(i), color_seg)
 
 				color_mask = np.mean(color_seg, 2)  # (H, W, C) -> (H, W), check if any pixel is not background
 				# prepare to show det on 2 different imgs
@@ -220,8 +220,12 @@ def callback_Img(data):
 				seg_img[color_mask != 0] = seg_img[color_mask != 0] * 0.5 + color_seg[color_mask != 0] * 0.5
 				seg_img = seg_img.astype(np.uint8)
 				seg_filename = f'{output}/{i}_{params.seg_list[seg_class_index]}_seg.jpg' 
-
+				
+				
+				newImage = cv2.cvtColor(seg_img, cv2.COLOR_RGB2BGR)
 				#cv2.imwrite(seg_filename, cv2.cvtColor(seg_img, cv2.COLOR_RGB2BGR))
+				cv2.imwrite(seg_filename, cv2.cvtColor(newImage, cv2.COLOR_RGB2BGR))
+				
 				seg_img = seg_img.astype(np.uint8)
 
 		regressBoxes = BBoxTransform()
@@ -271,7 +275,7 @@ def callback_Img(data):
 
 				if show_det:
 					plot_one_box(det_only_imgs[i], [x1, y1, x2, y2], label=obj, score=score, color=color_list[get_index_label(obj, obj_list)])
-			#cv2.imshow(ori_imgs[i])
+		
 			#if show_det:
 				#cv2.imwrite(f'{output}/{i}_det.jpg',  cv2.cvtColor(det_only_imgs[i], cv2.COLOR_RGB2BGR))
 
@@ -282,7 +286,7 @@ def callback_Img(data):
 			#if imwrite:
 				#cv2.imwrite(f'{output}/{i}.jpg', cv2.cvtColor(ori_imgs[i], cv2.COLOR_RGB2BGR))
 	gray = cv2.cvtColor(ori_imgs[0], cv2.COLOR_RGB2BGR)
-	#cv2.imwrite(f'{output}/{i}.jpg', cv2.cvtColor(gray, cv2.COLOR_RGB2BGR))
+	cv2.imwrite(f'{output}/{i}.jpg', cv2.cvtColor(gray, cv2.COLOR_RGB2BGR))
 	#print("check-point")
 	#cv2.imshow('img',gray)
 	
