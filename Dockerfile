@@ -59,15 +59,7 @@ RUN echo "python3 image_subscriber.py" >> .bashrc
 
 # CMD ["python3", "image_subscriber.py"]
 # RUN echo "" >> .bashrc
-
-
 # RUN echo "rosrun ros_basics_tutorials image_subscriber.py" >> .bashrc
-
-
-
-
 # /root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/scripts
-
-
 # WORKDIR /root
 
