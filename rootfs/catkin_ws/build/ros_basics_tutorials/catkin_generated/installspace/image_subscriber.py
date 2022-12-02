@@ -32,7 +32,10 @@ from torchvision import transforms
 import argparse
 from HybridNets.utils.constants import *
 from glob import glob
+from ros_basics_tutorials.msg import BoundingBox, BoundingBoxes, ObjectCount
 #import cv2_imshow
+
+boxes = BoundingBoxes();
 # load model
 model = torch.hub.load('datvuthanh/hybridnets', 'hybridnets', pretrained=True)
 torch.save(model.state_dict(), 'model_weights.pth')
@@ -131,7 +134,7 @@ def callback_Img(data):
 	#ori_imgs.append(img)
 	#ori_imgs = [cv2.cvtColor(i, cv2.COLOR_BGR2RGB) for i in ori_imgs]
 	ori_imgs = [cv2.cvtColor(img, cv2.COLOR_BGR2RGB)]
-	cv2.imwrite(f'{output}/i.jpg', ori_imgs[0])
+	#cv2.imwrite(f'{output}/i.jpg', ori_imgs[0])
 	#print(f"FOUND {len(ori_imgs)} IMAGES")
 	# cv2.imwrite('ori.jpg', ori_imgs[0])
 	# cv2.imwrite('normalized.jpg', normalized_imgs[0]*255)
@@ -234,11 +237,32 @@ def callback_Img(data):
 			#print(i)
 			#cv2_imshow(ori_imgs[i])
 			out[i]['rois'] = scale_coords(ori_imgs[i][:2], out[i]['rois'], shapes[i][0], shapes[i][1])
+			#boxes = []
 			for j in range(len(out[i]['rois'])):
 				x1, y1, x2, y2 = out[i]['rois'][j].astype(int)
 				obj = obj_list[out[i]['class_ids'][j]]
 				score = float(out[i]['scores'][j])
 				plot_one_box(ori_imgs[i], [x1, y1, x2, y2], label=obj, score=score, color=color_list[get_index_label(obj, obj_list)])
+				
+				#Add to BoundingBoxes
+				box = BoundingBox()
+				box.xmin = x1
+				box.xmax = x2
+				box.ymin = y1
+				box.ymax = y2
+				box.id = j
+				box.probability = score
+				box.Class = obj
+				boxes.bounding_boxes.append(box)
+				
+				print(box.xmin)
+				print(box.xmax)
+				print(box.ymin)
+				print(box.ymax)
+				print(box.id)
+				print(box.probability)
+				print(box.Class)
+				#boxPub.publish(boxes);
 				#cv2_imshow(ori_imgs[i])
 				#grayImageMsg = CvBridge().cv2_to_imgmsg(ori_imgs[i].astype(np.uint8))
 	#grayImageMsg.header = data.header
@@ -260,7 +284,7 @@ def callback_Img(data):
 	gray = cv2.cvtColor(ori_imgs[0], cv2.COLOR_RGB2BGR)
 	#cv2.imwrite(f'{output}/{i}.jpg', cv2.cvtColor(gray, cv2.COLOR_RGB2BGR))
 	#print("check-point")
-	# cv2.imshow('img',gray)
+	#cv2.imshow('img',gray)
 	
 	grayImageMsg = CvBridge().cv2_to_imgmsg(gray.astype(np.uint8)) #change
 	grayImageMsg.header = data.header
@@ -278,7 +302,7 @@ def callback_Img(data):
 
 
 
-
+																																																																																																										
 	
 
 
@@ -287,5 +311,7 @@ rospy.init_node('img_record_node')
 rospy.Subscriber("/front_camera/image_raw", Image, callback_Img)
 #print("check")
 grayImgPub = rospy.Publisher('/img_gray', Image, queue_size=10)
+#boxPub = rospy.Publisher('bounding_boxes', BoundingBoxes, queue_size=10)
 #print("check2")
 rospy.spin()
+

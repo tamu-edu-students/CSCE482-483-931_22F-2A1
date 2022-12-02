@@ -32,7 +32,10 @@ from torchvision import transforms
 import argparse
 from HybridNets.utils.constants import *
 from glob import glob
+from ros_basics_tutorials.msg import BoundingBox, BoundingBoxes, ObjectCount
 #import cv2_imshow
+
+boxes = BoundingBoxes();
 # load model
 model = torch.hub.load('datvuthanh/hybridnets', 'hybridnets', pretrained=True)
 torch.save(model.state_dict(), 'model_weights.pth')
@@ -58,7 +61,7 @@ bridge = CvBridge()
 print("check-point")
 def callback_Img(data):
 	#print("got an image")
-	global bridge
+	#global bridge
 	#print("Khai is good")
 	try:
 		img = bridge.imgmsg_to_cv2(data, desired_encoding='rgb8')
@@ -131,7 +134,7 @@ def callback_Img(data):
 	#ori_imgs.append(img)
 	#ori_imgs = [cv2.cvtColor(i, cv2.COLOR_BGR2RGB) for i in ori_imgs]
 	ori_imgs = [cv2.cvtColor(img, cv2.COLOR_BGR2RGB)]
-	cv2.imwrite(f'{output}/i.jpg', ori_imgs[0])
+	#cv2.imwrite(f'{output}/i.jpg', ori_imgs[0])
 	#print(f"FOUND {len(ori_imgs)} IMAGES")
 	# cv2.imwrite('ori.jpg', ori_imgs[0])
 	# cv2.imwrite('normalized.jpg', normalized_imgs[0]*255)
@@ -207,7 +210,7 @@ def callback_Img(data):
 				for index, seg_class in enumerate(params.seg_list):
 					color_seg[seg_mask_ == index+1] = color_list_seg[seg_class]
 				color_seg = color_seg[..., ::-1]  # RGB -> BGR
-				# cv2.imwrite('seg_only_{}.jpg'.format(i), color_seg)
+				#cv2.imwrite('seg_test_only_{}.jpg'.format(i), color_seg)
 
 				color_mask = np.mean(color_seg, 2)  # (H, W, C) -> (H, W), check if any pixel is not background
 				# prepare to show det on 2 different imgs
@@ -217,8 +220,12 @@ def callback_Img(data):
 				seg_img[color_mask != 0] = seg_img[color_mask != 0] * 0.5 + color_seg[color_mask != 0] * 0.5
 				seg_img = seg_img.astype(np.uint8)
 				seg_filename = f'{output}/{i}_{params.seg_list[seg_class_index]}_seg.jpg' 
-
-				cv2.imwrite(seg_filename, cv2.cvtColor(seg_img, cv2.COLOR_RGB2BGR))
+				
+				
+				newImage = cv2.cvtColor(seg_img, cv2.COLOR_RGB2BGR)
+				#cv2.imwrite(seg_filename, cv2.cvtColor(seg_img, cv2.COLOR_RGB2BGR))
+				cv2.imwrite(seg_filename, cv2.cvtColor(newImage, cv2.COLOR_RGB2BGR))
+				
 				seg_img = seg_img.astype(np.uint8)
 
 		regressBoxes = BBoxTransform()
@@ -234,11 +241,32 @@ def callback_Img(data):
 			#print(i)
 			#cv2_imshow(ori_imgs[i])
 			out[i]['rois'] = scale_coords(ori_imgs[i][:2], out[i]['rois'], shapes[i][0], shapes[i][1])
+			#boxes = []
 			for j in range(len(out[i]['rois'])):
 				x1, y1, x2, y2 = out[i]['rois'][j].astype(int)
 				obj = obj_list[out[i]['class_ids'][j]]
 				score = float(out[i]['scores'][j])
 				plot_one_box(ori_imgs[i], [x1, y1, x2, y2], label=obj, score=score, color=color_list[get_index_label(obj, obj_list)])
+				
+				#Add to BoundingBoxes
+				#box = BoundingBox()
+				#box.xmin = x1
+				#box.xmax = x2
+				#box.ymin = y1
+				#box.ymax = y2
+				#box.id = j
+				#box.probability = score
+				#box.Class = obj
+				#boxes.bounding_boxes.append(box)
+				
+				#print(box.xmin)
+				#print(box.xmax)
+				#print(box.ymin)
+				#print(box.ymax)
+				#print(box.id)
+				#print(box.probability)
+				#print(box.Class)
+				#boxPub.publish(boxes);
 				#cv2_imshow(ori_imgs[i])
 				#grayImageMsg = CvBridge().cv2_to_imgmsg(ori_imgs[i].astype(np.uint8))
 	#grayImageMsg.header = data.header
@@ -247,26 +275,26 @@ def callback_Img(data):
 
 				if show_det:
 					plot_one_box(det_only_imgs[i], [x1, y1, x2, y2], label=obj, score=score, color=color_list[get_index_label(obj, obj_list)])
-			#cv2.imshow(ori_imgs[i])
-			if show_det:
-				cv2.imwrite(f'{output}/{i}_det.jpg',  cv2.cvtColor(det_only_imgs[i], cv2.COLOR_RGB2BGR))
+		
+			#if show_det:
+				#cv2.imwrite(f'{output}/{i}_det.jpg',  cv2.cvtColor(det_only_imgs[i], cv2.COLOR_RGB2BGR))
 
-			if imshow:
-				cv2.imshow('img', ori_imgs[i])
-				cv2.waitKey(0)
+			#if imshow:
+				#cv2.imshow('img', ori_imgs[i])
+				#cv2.waitKey(0)
 
-			if imwrite:
-				cv2.imwrite(f'{output}/{i}.jpg', cv2.cvtColor(ori_imgs[i], cv2.COLOR_RGB2BGR))
+			#if imwrite:
+				#cv2.imwrite(f'{output}/{i}.jpg', cv2.cvtColor(ori_imgs[i], cv2.COLOR_RGB2BGR))
 	gray = cv2.cvtColor(ori_imgs[0], cv2.COLOR_RGB2BGR)
-	#cv2.imwrite(f'{output}/{i}.jpg', cv2.cvtColor(gray, cv2.COLOR_RGB2BGR))
+	cv2.imwrite(f'{output}/{i}.jpg', cv2.cvtColor(gray, cv2.COLOR_RGB2BGR))
 	#print("check-point")
-	# cv2.imshow('img',gray)
+	#cv2.imshow('img',gray)
 	
 	grayImageMsg = CvBridge().cv2_to_imgmsg(gray.astype(np.uint8)) #change
 	grayImageMsg.header = data.header
 	grayImageMsg.encoding = '8UC1' #Change
 	grayImgPub.publish(grayImageMsg) #Change
-
+	print("testing")
 
 
 
@@ -278,14 +306,16 @@ def callback_Img(data):
 
 
 
-
+																																																																																																										
 	
 
 
 
 rospy.init_node('img_record_node')
 rospy.Subscriber("/front_camera/image_raw", Image, callback_Img)
-#print("check")
+print("check")
 grayImgPub = rospy.Publisher('/img_gray', Image, queue_size=10)
-#print("check2")
+#boxPub = rospy.Publisher('bounding_boxes', BoundingBoxes, queue_size=10)
+print("check2")
 rospy.spin()
+
