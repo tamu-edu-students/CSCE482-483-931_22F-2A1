@@ -61,7 +61,7 @@ bridge = CvBridge()
 print("check-point")
 def callback_Img(data):
 	#print("got an image")
-	global bridge
+	#global bridge
 	#print("Khai is good")
 	try:
 		img = bridge.imgmsg_to_cv2(data, desired_encoding='rgb8')
@@ -249,23 +249,23 @@ def callback_Img(data):
 				plot_one_box(ori_imgs[i], [x1, y1, x2, y2], label=obj, score=score, color=color_list[get_index_label(obj, obj_list)])
 				
 				#Add to BoundingBoxes
-				box = BoundingBox()
-				box.xmin = x1
-				box.xmax = x2
-				box.ymin = y1
-				box.ymax = y2
-				box.id = j
-				box.probability = score
-				box.Class = obj
-				boxes.bounding_boxes.append(box)
+				#box = BoundingBox()
+				#box.xmin = x1
+				#box.xmax = x2
+				#box.ymin = y1
+				#box.ymax = y2
+				#box.id = j
+				#box.probability = score
+				#box.Class = obj
+				#boxes.bounding_boxes.append(box)
 				
-				print(box.xmin)
-				print(box.xmax)
-				print(box.ymin)
-				print(box.ymax)
-				print(box.id)
-				print(box.probability)
-				print(box.Class)
+				#print(box.xmin)
+				#print(box.xmax)
+				#print(box.ymin)
+				#print(box.ymax)
+				#print(box.id)
+				#print(box.probability)
+				#print(box.Class)
 				#boxPub.publish(boxes);
 				#cv2_imshow(ori_imgs[i])
 				#grayImageMsg = CvBridge().cv2_to_imgmsg(ori_imgs[i].astype(np.uint8))
@@ -294,7 +294,7 @@ def callback_Img(data):
 	grayImageMsg.header = data.header
 	grayImageMsg.encoding = '8UC1' #Change
 	grayImgPub.publish(grayImageMsg) #Change
-
+	print("testing")
 
 
 
@@ -313,9 +313,9 @@ def callback_Img(data):
 
 rospy.init_node('img_record_node')
 rospy.Subscriber("/front_camera/image_raw", Image, callback_Img)
-#print("check")
+print("check")
 grayImgPub = rospy.Publisher('/img_gray', Image, queue_size=10)
 #boxPub = rospy.Publisher('bounding_boxes', BoundingBoxes, queue_size=10)
-#print("check2")
+print("check2")
 rospy.spin()
 
