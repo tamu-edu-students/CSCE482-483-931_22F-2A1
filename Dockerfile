@@ -62,5 +62,3 @@ RUN apt-get update && \
 # RUN echo "rosrun ros_basics_tutorials image_subscriber.py" >> .bashrc
 # /root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/scripts
 # WORKDIR /root
-
-

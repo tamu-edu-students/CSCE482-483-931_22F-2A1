@@ -53,23 +53,48 @@ Docker Package can be found here:
 [https://github.com/users/ojasonbernal/packages/container/package/2a1-package](https://github.com/users/ojasonbernal/packages/container/package/2a1-package)
 
 ## Usage
-It is best to have two terminals open to run the project. \
 Run the latest Docker container from image
 ```bash
 make init
 ```
 Executing ```make init``` will then open the container Command-Line Interface (CLI). Make sure to run the command on both terminals as  this will be useful for the next steps.
 
-First execute the command in CLI1:
+Optional: If you already have a container named 2a1-package, then execute the following command to run the docker container
+```
+make run
+```
+
+Ensure to source the environment first in order for the project to run as intended.
+Run the following commands to source the environment:
+```
+source /opt/ros/noetic/setup.bash
+```
+```
+source rootfs/catkin_ws/devel/setup.bash
+```
+
+We need to change the directory to the catkin_ws to be able to compile using catkin_make.
+```
+cd rootfs/catkin_ws/
+catkin_make
+```
+
+
+Once you have completed the above steps, you will be able to open up VNC. You will need to be in VNC to continue. \
+You can view VNC through [http://localhost:6081/vnc.html](http://localhost:6081/vnc.html) \
+You should enter "password" for the password.
+
+It is best to have two terminals open to run the project. \
+First execute the command in terminal 1:
 ```bash
-source rootfs/rootfs/catkin_ws/devel/setup.bash; (roscore &); rosbag play -r 10 --loop rootfs/16-mcity1.bag
+source rootfs/catkin_ws/devel/setup.bash; (roscore &); rosbag play -r 10 --loop rootfs/16-mcity1.bag
 ```
 The execution of the above command will make it so that the ROS node is sourced (this must be done in order to use ROS) and a small video will be played to test the model.
 
 
-Then execute this command in CLI2, in order to run the developed HybridNets node:
+Then execute this command in terminal 2, in order to run the developed HybridNets node:
 ```bash
-source rootfs/rootfs/catkin_ws/devel/setup.bash; (rqt_image_view &); python3 /root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/scripts/image_subscriber.py
+source rootfs/catkin_ws/devel/setup.bash; (rqt_image_view &); python3 /root/rootfs/catkin_ws/src/ros_basics_tutorials/scripts/image_subscriber.py
 ```
 The above command will execute the Python ROS node which was created for joint detection of objects and lanes. 
 The project is also publishing the bounding box information to be able to be received by another ROS node.
@@ -92,7 +117,6 @@ The joint detection model is a great start to be able to optimize the performanc
 
 Metrics improved based on other models:
 * Accuracy
-* Speed
 * Usability
 * Robustness
 
