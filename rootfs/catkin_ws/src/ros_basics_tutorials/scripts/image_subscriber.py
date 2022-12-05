@@ -235,7 +235,7 @@ def callback_Img(data):
 			#print(i)
 			#cv2_imshow(ori_imgs[i])
 			out[i]['rois'] = scale_coords(ori_imgs[i][:2], out[i]['rois'], shapes[i][0], shapes[i][1])
-			boxes = []
+			boxes.bounding_boxes = []
 			for j in range(len(out[i]['rois'])):
 				x1, y1, x2, y2 = out[i]['rois'][j].astype(int)
 				obj = obj_list[out[i]['class_ids'][j]]
