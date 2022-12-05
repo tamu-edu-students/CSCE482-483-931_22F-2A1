@@ -8,7 +8,7 @@ from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
 import torch
 import sys
-sys.path.insert(0, r'rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/scripts/HybridNets/')
+sys.path.insert(0, r'rootfs/catkin_ws/src/ros_basics_tutorials/scripts/HybridNets/')
 import time
 import cv2
 import torch
@@ -76,10 +76,10 @@ def callback_Img(data):
 	# This is the lines of code from Hybridnets
 
 	# Initialization
-	params = Params(f'/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/scripts/bdd100k.yml')
+	params = Params(f'/root/rootfs/catkin_ws/src/ros_basics_tutorials/scripts/bdd100k.yml')
 	input_imgs = []
 	shapes = []
-	output = '/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/scripts/'
+	output = '/root/rootfs/catkin_ws/src/ros_basics_tutorials/scripts/'
 	output = output[:-1]
 	# Might not need this in the ROS package
 	source = '/content'
@@ -282,6 +282,7 @@ def callback_Img(data):
 	color = ori_imgs[0].copy() #This is for images output
 	color = cv2.cvtColor(color, cv2.COLOR_BGR2RGB)
 	cv2.imwrite(f'{output}/{i}.jpg', cv2.cvtColor(color, cv2.COLOR_RGB2BGR))
+
 	#print("check-point")
 	#cv2.imshow('img',gray)
 	
@@ -306,3 +307,25 @@ boxPub = rospy.Publisher('bounding_boxes', BoundingBoxes, queue_size=10)
 rospy.spin()
 
 
+
+#Checkout http://wiki.ros.org/cv_bridge/Tutorials
+# import sys
+# import cv2
+# import rospy
+# import numpy as np
+# from cv_bridge import CvBridge
+# from sensor_msgs.msg import Image
+
+# bridge = CvBridge()
+# def callback_Img(data):
+#     img = bridge.imgmsg_to_cv2(data, desired_encoding='rgb8')
+#     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+#     grayImageMsg = CvBridge().cv2_to_imgmsg(gray.astype(np.uint8))
+#     grayImageMsg.header = data.header
+#     grayImageMsg.encoding = '8UC1'
+#     grayImgPub.publish(grayImageMsg)
+
+# rospy.init_node('img_record_node')
+# rospy.Subscriber("/front_camera/image_raw", Image, callback_Img)
+# grayImgPub = rospy.Publisher('/img_gray', Image, queue_size=10)
+# rospy.spin()
