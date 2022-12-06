@@ -38,7 +38,7 @@ git clone --recursive https://github.com/tamu-edu-students/CSCE482-483-931_22F-2
 cd CSCE482-483-931_22F-2A1
 ```
 
-Build the latest Docker container from image
+Build the latest Docker container from image. Building the image initally may take 15-30 minutes, depending on the speed of your internet and performance of machine.
 ```bash
 make build
 ```
@@ -60,21 +60,21 @@ make init
 Executing ```make init``` will then open the container Command-Line Interface (CLI). Make sure to run the command on both terminals as  this will be useful for the next steps.
 
 Optional: If you already have a container named 2a1-package, then execute the following command to run the docker container
-```
+```bash
 make run
 ```
 
 Ensure to source the environment first in order for the project to run as intended.
 Run the following commands to source the environment:
-```
+```bash
 source /opt/ros/noetic/setup.bash
 ```
-```
+```bash
 source rootfs/catkin_ws/devel/setup.bash
 ```
 
 We need to change the directory to the catkin_ws to be able to compile using catkin_make.
-```
+```bash
 cd rootfs/catkin_ws/
 catkin_make
 ```
@@ -101,6 +101,13 @@ The project is also publishing the bounding box information to be able to be rec
 
 Open the *rootfs/* folder to find images that are being outputted showcasing the joint detection model.
 
+You must be in the *rootfs/catkin_ws/* folder for this step. You can view the ROS messages for both the BoudingBox and BoudingBoxes by running the following command:
+```bash
+rosmsg show BoundingBox
+```
+```bash
+rosmsg show BoundingBoxes
+```
 
 ## Performance Testing
 For testing, the team began by executing the [16-mcity1.bag](https://drive.google.com/file/d/1wd52kaQGrDC4oLVAq-fCSeIch1_wm808/view?usp=sharing) file on both the YOLO and HybridNets Machine Learning Models. \
