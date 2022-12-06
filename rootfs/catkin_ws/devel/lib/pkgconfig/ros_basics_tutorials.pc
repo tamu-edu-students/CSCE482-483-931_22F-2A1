@@ -1,8 +1,8 @@
-prefix=/root/rootfs/rootfs/catkin_ws/devel
+prefix=/root/rootfs/catkin_ws/devel
 
 Name: ros_basics_tutorials
 Description: Description of ros_basics_tutorials
 Version: 0.0.0
-Cflags: -I/root/rootfs/rootfs/catkin_ws/devel/include -I/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/include
+Cflags: -I/root/rootfs/catkin_ws/devel/include
 Libs: -L${prefix}/lib -lros_basics_tutorials
 Requires: roscpp rospy std_msgs

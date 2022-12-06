@@ -1,8 +1,8 @@
 # generated from catkin/cmake/template/pkg.context.pc.in
 CATKIN_PACKAGE_PREFIX = ""
-PROJECT_PKG_CONFIG_INCLUDE_DIRS = "/root/rootfs/rootfs/catkin_ws/devel/include;/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/include".split(';') if "/root/rootfs/rootfs/catkin_ws/devel/include;/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/include" != "" else []
+PROJECT_PKG_CONFIG_INCLUDE_DIRS = "/root/rootfs/catkin_ws/devel/include".split(';') if "/root/rootfs/catkin_ws/devel/include" != "" else []
 PROJECT_CATKIN_DEPENDS = "roscpp;rospy;std_msgs".replace(';', ' ')
 PKG_CONFIG_LIBRARIES_WITH_PREFIX = "-lros_basics_tutorials".split(';') if "-lros_basics_tutorials" != "" else []
 PROJECT_NAME = "ros_basics_tutorials"
-PROJECT_SPACE_DIR = "/root/rootfs/rootfs/catkin_ws/devel"
+PROJECT_SPACE_DIR = "/root/rootfs/catkin_ws/devel"
 PROJECT_VERSION = "0.0.0"

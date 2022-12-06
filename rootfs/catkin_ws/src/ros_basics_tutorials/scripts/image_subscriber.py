@@ -20,7 +20,6 @@ import cv2
 import time
 import torch
 from torch.backends import cudnn
-#from backbone import HybridNetsBackbone
 import cv2
 import numpy as np
 from glob import glob
@@ -37,10 +36,8 @@ from ros_basics_tutorials.msg import BoundingBox, BoundingBoxes, ObjectCount
 
 boxes = BoundingBoxes();
 # load model
-model = torch.hub.load('datvuthanh/hybridnets', 'hybridnets', pretrained=True)
+model = torch.hub.load('datvuthanh/hybridnets', 'hybridnets', pretrained=True, trust_repo=True)
 torch.save(model.state_dict(), 'model_weights.pth')
-#img = torch.randn(1,3,640,384)
-#model.eval()
 weight = (torch.load('model_weights.pth'))
 model.requires_grad_(False) #Note: something about the training, recheck
 model.eval()
@@ -54,26 +51,6 @@ def callback_Img(data):
 		img = bridge.imgmsg_to_cv2(data, desired_encoding='rgb8')
 	except CvBridgeError as e:
 		print(e)
-	#print("Khai is insite")
-	# Start coordinate, here (5, 5)
-	# represents the top left corner of rectangle
-	#start_point = (5, 5)
-	#cv2.imwrite(f'{output}/origin.jpg', img)
-	# Ending coordinate, here (220, 220)
-	# represents the bottom right corner of rectangle
-	#end_point = (220, 220)
-
-	# Blue color in BGR
-	#color = (255, 0, 0)
-
-
-	# Line thickness of 2 px
-	#thickness = 2
-	#img = cv2.rectangle(img, start_point, end_point, color, thickness)
-	#img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
-
-
-	# This is the lines of code from Hybridnets
 
 	# Initialization
 	params = Params(f'/root/rootfs/catkin_ws/src/ros_basics_tutorials/scripts/bdd100k.yml')
@@ -282,7 +259,6 @@ def callback_Img(data):
 	color = ori_imgs[0].copy() #This is for images output
 	color = cv2.cvtColor(color, cv2.COLOR_BGR2RGB)
 	cv2.imwrite(f'{output}/{i}.jpg', cv2.cvtColor(color, cv2.COLOR_RGB2BGR))
-
 	#print("check-point")
 	#cv2.imshow('img',gray)
 	
@@ -305,8 +281,6 @@ rospy.Subscriber("/front_camera/image_raw", Image, callback_Img)
 grayImgPub = rospy.Publisher('/img_gray', Image, queue_size=10)
 boxPub = rospy.Publisher('bounding_boxes', BoundingBoxes, queue_size=10)
 rospy.spin()
-
-
 
 #Checkout http://wiki.ros.org/cv_bridge/Tutorials
 # import sys

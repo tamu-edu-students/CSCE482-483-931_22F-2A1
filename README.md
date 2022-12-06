@@ -64,6 +64,7 @@ Optional: If you already have a container named 2a1-package, then execute the fo
 make run
 ```
 
+***YOU MUST COMPLETE THESE STEPS EVERYTIME YOU RUN THE PROJECT*** \
 Ensure to source the environment first in order for the project to run as intended.
 Run the following commands to source the environment:
 ```bash
@@ -99,7 +100,13 @@ source rootfs/catkin_ws/devel/setup.bash; (rqt_image_view &); python3 /root/root
 The above command will execute the Python ROS node which was created for joint detection of objects and lanes. 
 The project is also publishing the bounding box information to be able to be received by another ROS node.
 
+
+The processed video may not show up on the VNC instantly, it is recommened to refresh the topics to be able to view the processed video. The refresh button is located next to the selection of topics, as seen below. \
+<img src="Reports/Assets/refresh-button.jpg" alt="Refresh Button" width="300" height="auto">
+
 Open the *rootfs/* folder to find images that are being outputted showcasing the joint detection model.
+
+
 
 You must be in the *rootfs/catkin_ws/* folder for this step. You can view the ROS messages for both the BoudingBox and BoudingBoxes by running the following command:
 ```bash

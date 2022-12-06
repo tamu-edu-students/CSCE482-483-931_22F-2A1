@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /root/rootfs/rootfs/catkin_ws/src
+CMAKE_SOURCE_DIR = /root/rootfs/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /root/rootfs/rootfs/catkin_ws/build
+CMAKE_BINARY_DIR = /root/rootfs/catkin_ws/build
 
 # Utility rule file for roscpp_generate_messages_py.
 
@@ -63,10 +63,10 @@ ros_basics_tutorials/CMakeFiles/roscpp_generate_messages_py.dir/build: roscpp_ge
 .PHONY : ros_basics_tutorials/CMakeFiles/roscpp_generate_messages_py.dir/build
 
 ros_basics_tutorials/CMakeFiles/roscpp_generate_messages_py.dir/clean:
-	cd /root/rootfs/rootfs/catkin_ws/build/ros_basics_tutorials && $(CMAKE_COMMAND) -P CMakeFiles/roscpp_generate_messages_py.dir/cmake_clean.cmake
+	cd /root/rootfs/catkin_ws/build/ros_basics_tutorials && $(CMAKE_COMMAND) -P CMakeFiles/roscpp_generate_messages_py.dir/cmake_clean.cmake
 .PHONY : ros_basics_tutorials/CMakeFiles/roscpp_generate_messages_py.dir/clean
 
 ros_basics_tutorials/CMakeFiles/roscpp_generate_messages_py.dir/depend:
-	cd /root/rootfs/rootfs/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/rootfs/rootfs/catkin_ws/src /root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials /root/rootfs/rootfs/catkin_ws/build /root/rootfs/rootfs/catkin_ws/build/ros_basics_tutorials /root/rootfs/rootfs/catkin_ws/build/ros_basics_tutorials/CMakeFiles/roscpp_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
+	cd /root/rootfs/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/rootfs/catkin_ws/src /root/rootfs/catkin_ws/src/ros_basics_tutorials /root/rootfs/catkin_ws/build /root/rootfs/catkin_ws/build/ros_basics_tutorials /root/rootfs/catkin_ws/build/ros_basics_tutorials/CMakeFiles/roscpp_generate_messages_py.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : ros_basics_tutorials/CMakeFiles/roscpp_generate_messages_py.dir/depend
 
