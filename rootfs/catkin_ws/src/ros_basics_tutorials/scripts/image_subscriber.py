@@ -36,7 +36,7 @@ from ros_basics_tutorials.msg import BoundingBox, BoundingBoxes, ObjectCount
 
 boxes = BoundingBoxes();
 # load model
-model = torch.hub.load('datvuthanh/hybridnets', 'hybridnets', pretrained=True)
+model = torch.hub.load('datvuthanh/hybridnets', 'hybridnets', pretrained=True, trust_repo=True)
 torch.save(model.state_dict(), 'model_weights.pth')
 weight = (torch.load('model_weights.pth'))
 model.requires_grad_(False) #Note: something about the training, recheck
