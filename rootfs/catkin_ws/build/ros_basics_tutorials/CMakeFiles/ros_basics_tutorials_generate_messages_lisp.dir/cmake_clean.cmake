@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
-  "/root/rootfs/rootfs/catkin_ws/devel/share/common-lisp/ros/ros_basics_tutorials/msg/BoundingBox.lisp"
-  "/root/rootfs/rootfs/catkin_ws/devel/share/common-lisp/ros/ros_basics_tutorials/msg/BoundingBoxes.lisp"
-  "/root/rootfs/rootfs/catkin_ws/devel/share/common-lisp/ros/ros_basics_tutorials/msg/ObjectCount.lisp"
+  "/root/rootfs/catkin_ws/devel/share/common-lisp/ros/ros_basics_tutorials/msg/BoundingBox.lisp"
+  "/root/rootfs/catkin_ws/devel/share/common-lisp/ros/ros_basics_tutorials/msg/BoundingBoxes.lisp"
+  "/root/rootfs/catkin_ws/devel/share/common-lisp/ros/ros_basics_tutorials/msg/ObjectCount.lisp"
   "CMakeFiles/ros_basics_tutorials_generate_messages_lisp"
 )
 

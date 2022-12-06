@@ -1,2 +1,2 @@
 - setup-file:
-    local-name: /root/rootfs/rootfs/catkin_ws/devel/setup.sh
+    local-name: /root/rootfs/catkin_ws/devel/setup.sh

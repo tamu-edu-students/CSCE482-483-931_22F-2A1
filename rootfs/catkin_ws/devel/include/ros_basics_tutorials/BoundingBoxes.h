@@ -8,7 +8,7 @@
 
 #include <string>
 #include <vector>
-#include <map>
+#include <memory>
 
 #include <ros/types.h>
 #include <ros/serialization.h>
@@ -46,7 +46,7 @@ struct BoundingBoxes_
    typedef  ::std_msgs::Header_<ContainerAllocator>  _image_header_type;
   _image_header_type image_header;
 
-   typedef std::vector< ::ros_basics_tutorials::BoundingBox_<ContainerAllocator> , typename ContainerAllocator::template rebind< ::ros_basics_tutorials::BoundingBox_<ContainerAllocator> >::other >  _bounding_boxes_type;
+   typedef std::vector< ::ros_basics_tutorials::BoundingBox_<ContainerAllocator> , typename std::allocator_traits<ContainerAllocator>::template rebind_alloc< ::ros_basics_tutorials::BoundingBox_<ContainerAllocator> >> _bounding_boxes_type;
   _bounding_boxes_type bounding_boxes;
 
 

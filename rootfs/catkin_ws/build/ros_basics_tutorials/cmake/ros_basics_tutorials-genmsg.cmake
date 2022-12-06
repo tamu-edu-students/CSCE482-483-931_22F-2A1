@@ -2,7 +2,7 @@
 
 message(STATUS "ros_basics_tutorials: 3 messages, 0 services")
 
-set(MSG_I_FLAGS "-Iros_basics_tutorials:/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg;-Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg")
+set(MSG_I_FLAGS "-Iros_basics_tutorials:/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg;-Istd_msgs:/opt/ros/noetic/share/std_msgs/cmake/../msg")
 
 # Find all generators
 find_package(gencpp REQUIRED)
@@ -17,19 +17,19 @@ add_custom_target(ros_basics_tutorials_generate_messages ALL)
 
 
 
-get_filename_component(_filename "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg" NAME_WE)
+get_filename_component(_filename "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg" NAME_WE)
 add_custom_target(_ros_basics_tutorials_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ros_basics_tutorials" "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg" ""
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ros_basics_tutorials" "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg" ""
 )
 
-get_filename_component(_filename "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg" NAME_WE)
+get_filename_component(_filename "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg" NAME_WE)
 add_custom_target(_ros_basics_tutorials_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ros_basics_tutorials" "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg" "std_msgs/Header:ros_basics_tutorials/BoundingBox"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ros_basics_tutorials" "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg" "ros_basics_tutorials/BoundingBox:std_msgs/Header"
 )
 
-get_filename_component(_filename "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/ObjectCount.msg" NAME_WE)
+get_filename_component(_filename "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/ObjectCount.msg" NAME_WE)
 add_custom_target(_ros_basics_tutorials_generate_messages_check_deps_${_filename}
-  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ros_basics_tutorials" "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/ObjectCount.msg" "std_msgs/Header"
+  COMMAND ${CATKIN_ENV} ${PYTHON_EXECUTABLE} ${GENMSG_CHECK_DEPS_SCRIPT} "ros_basics_tutorials" "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/ObjectCount.msg" "std_msgs/Header"
 )
 
 #
@@ -39,19 +39,19 @@ add_custom_target(_ros_basics_tutorials_generate_messages_check_deps_${_filename
 ### Section generating for lang: gencpp
 ### Generating Messages
 _generate_msg_cpp(ros_basics_tutorials
-  "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg"
+  "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/ros_basics_tutorials
 )
 _generate_msg_cpp(ros_basics_tutorials
-  "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg"
+  "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg"
+  "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/ros_basics_tutorials
 )
 _generate_msg_cpp(ros_basics_tutorials
-  "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/ObjectCount.msg"
+  "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/ObjectCount.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${gencpp_INSTALL_DIR}/ros_basics_tutorials
@@ -71,11 +71,11 @@ add_custom_target(ros_basics_tutorials_generate_messages_cpp
 add_dependencies(ros_basics_tutorials_generate_messages ros_basics_tutorials_generate_messages_cpp)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg" NAME_WE)
+get_filename_component(_filename "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg" NAME_WE)
 add_dependencies(ros_basics_tutorials_generate_messages_cpp _ros_basics_tutorials_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg" NAME_WE)
+get_filename_component(_filename "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg" NAME_WE)
 add_dependencies(ros_basics_tutorials_generate_messages_cpp _ros_basics_tutorials_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/ObjectCount.msg" NAME_WE)
+get_filename_component(_filename "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/ObjectCount.msg" NAME_WE)
 add_dependencies(ros_basics_tutorials_generate_messages_cpp _ros_basics_tutorials_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -88,19 +88,19 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS ros_basics_tutorials_generate_messa
 ### Section generating for lang: geneus
 ### Generating Messages
 _generate_msg_eus(ros_basics_tutorials
-  "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg"
+  "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/ros_basics_tutorials
 )
 _generate_msg_eus(ros_basics_tutorials
-  "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg"
+  "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg"
+  "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/ros_basics_tutorials
 )
 _generate_msg_eus(ros_basics_tutorials
-  "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/ObjectCount.msg"
+  "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/ObjectCount.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${geneus_INSTALL_DIR}/ros_basics_tutorials
@@ -120,11 +120,11 @@ add_custom_target(ros_basics_tutorials_generate_messages_eus
 add_dependencies(ros_basics_tutorials_generate_messages ros_basics_tutorials_generate_messages_eus)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg" NAME_WE)
+get_filename_component(_filename "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg" NAME_WE)
 add_dependencies(ros_basics_tutorials_generate_messages_eus _ros_basics_tutorials_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg" NAME_WE)
+get_filename_component(_filename "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg" NAME_WE)
 add_dependencies(ros_basics_tutorials_generate_messages_eus _ros_basics_tutorials_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/ObjectCount.msg" NAME_WE)
+get_filename_component(_filename "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/ObjectCount.msg" NAME_WE)
 add_dependencies(ros_basics_tutorials_generate_messages_eus _ros_basics_tutorials_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -137,19 +137,19 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS ros_basics_tutorials_generate_messa
 ### Section generating for lang: genlisp
 ### Generating Messages
 _generate_msg_lisp(ros_basics_tutorials
-  "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg"
+  "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/ros_basics_tutorials
 )
 _generate_msg_lisp(ros_basics_tutorials
-  "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg"
+  "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg"
+  "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/ros_basics_tutorials
 )
 _generate_msg_lisp(ros_basics_tutorials
-  "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/ObjectCount.msg"
+  "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/ObjectCount.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${genlisp_INSTALL_DIR}/ros_basics_tutorials
@@ -169,11 +169,11 @@ add_custom_target(ros_basics_tutorials_generate_messages_lisp
 add_dependencies(ros_basics_tutorials_generate_messages ros_basics_tutorials_generate_messages_lisp)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg" NAME_WE)
+get_filename_component(_filename "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg" NAME_WE)
 add_dependencies(ros_basics_tutorials_generate_messages_lisp _ros_basics_tutorials_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg" NAME_WE)
+get_filename_component(_filename "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg" NAME_WE)
 add_dependencies(ros_basics_tutorials_generate_messages_lisp _ros_basics_tutorials_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/ObjectCount.msg" NAME_WE)
+get_filename_component(_filename "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/ObjectCount.msg" NAME_WE)
 add_dependencies(ros_basics_tutorials_generate_messages_lisp _ros_basics_tutorials_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -186,19 +186,19 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS ros_basics_tutorials_generate_messa
 ### Section generating for lang: gennodejs
 ### Generating Messages
 _generate_msg_nodejs(ros_basics_tutorials
-  "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg"
+  "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/ros_basics_tutorials
 )
 _generate_msg_nodejs(ros_basics_tutorials
-  "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg"
+  "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg"
+  "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/ros_basics_tutorials
 )
 _generate_msg_nodejs(ros_basics_tutorials
-  "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/ObjectCount.msg"
+  "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/ObjectCount.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${gennodejs_INSTALL_DIR}/ros_basics_tutorials
@@ -218,11 +218,11 @@ add_custom_target(ros_basics_tutorials_generate_messages_nodejs
 add_dependencies(ros_basics_tutorials_generate_messages ros_basics_tutorials_generate_messages_nodejs)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg" NAME_WE)
+get_filename_component(_filename "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg" NAME_WE)
 add_dependencies(ros_basics_tutorials_generate_messages_nodejs _ros_basics_tutorials_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg" NAME_WE)
+get_filename_component(_filename "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg" NAME_WE)
 add_dependencies(ros_basics_tutorials_generate_messages_nodejs _ros_basics_tutorials_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/ObjectCount.msg" NAME_WE)
+get_filename_component(_filename "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/ObjectCount.msg" NAME_WE)
 add_dependencies(ros_basics_tutorials_generate_messages_nodejs _ros_basics_tutorials_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility
@@ -235,19 +235,19 @@ list(APPEND ${PROJECT_NAME}_EXPORTED_TARGETS ros_basics_tutorials_generate_messa
 ### Section generating for lang: genpy
 ### Generating Messages
 _generate_msg_py(ros_basics_tutorials
-  "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg"
+  "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg"
   "${MSG_I_FLAGS}"
   ""
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/ros_basics_tutorials
 )
 _generate_msg_py(ros_basics_tutorials
-  "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg"
+  "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg"
   "${MSG_I_FLAGS}"
-  "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg;/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg"
+  "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg;/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/ros_basics_tutorials
 )
 _generate_msg_py(ros_basics_tutorials
-  "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/ObjectCount.msg"
+  "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/ObjectCount.msg"
   "${MSG_I_FLAGS}"
   "/opt/ros/noetic/share/std_msgs/cmake/../msg/Header.msg"
   ${CATKIN_DEVEL_PREFIX}/${genpy_INSTALL_DIR}/ros_basics_tutorials
@@ -267,11 +267,11 @@ add_custom_target(ros_basics_tutorials_generate_messages_py
 add_dependencies(ros_basics_tutorials_generate_messages ros_basics_tutorials_generate_messages_py)
 
 # add dependencies to all check dependencies targets
-get_filename_component(_filename "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg" NAME_WE)
+get_filename_component(_filename "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg" NAME_WE)
 add_dependencies(ros_basics_tutorials_generate_messages_py _ros_basics_tutorials_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg" NAME_WE)
+get_filename_component(_filename "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBoxes.msg" NAME_WE)
 add_dependencies(ros_basics_tutorials_generate_messages_py _ros_basics_tutorials_generate_messages_check_deps_${_filename})
-get_filename_component(_filename "/root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/ObjectCount.msg" NAME_WE)
+get_filename_component(_filename "/root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/ObjectCount.msg" NAME_WE)
 add_dependencies(ros_basics_tutorials_generate_messages_py _ros_basics_tutorials_generate_messages_check_deps_${_filename})
 
 # target for backward compatibility

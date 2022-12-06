@@ -1,7 +1,7 @@
 file(REMOVE_RECURSE
-  "/root/rootfs/rootfs/catkin_ws/devel/include/ros_basics_tutorials/BoundingBox.h"
-  "/root/rootfs/rootfs/catkin_ws/devel/include/ros_basics_tutorials/BoundingBoxes.h"
-  "/root/rootfs/rootfs/catkin_ws/devel/include/ros_basics_tutorials/ObjectCount.h"
+  "/root/rootfs/catkin_ws/devel/include/ros_basics_tutorials/BoundingBox.h"
+  "/root/rootfs/catkin_ws/devel/include/ros_basics_tutorials/BoundingBoxes.h"
+  "/root/rootfs/catkin_ws/devel/include/ros_basics_tutorials/ObjectCount.h"
   "CMakeFiles/ros_basics_tutorials_generate_messages_cpp"
 )
 

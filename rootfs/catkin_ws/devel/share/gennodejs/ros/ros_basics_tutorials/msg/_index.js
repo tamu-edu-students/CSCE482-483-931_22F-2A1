@@ -1,12 +1,12 @@
 
 "use strict";
 
-let BoundingBoxes = require('./BoundingBoxes.js');
 let ObjectCount = require('./ObjectCount.js');
+let BoundingBoxes = require('./BoundingBoxes.js');
 let BoundingBox = require('./BoundingBox.js');
 
 module.exports = {
-  BoundingBoxes: BoundingBoxes,
   ObjectCount: ObjectCount,
+  BoundingBoxes: BoundingBoxes,
   BoundingBox: BoundingBox,
 };

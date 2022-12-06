@@ -43,10 +43,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /root/rootfs/rootfs/catkin_ws/src
+CMAKE_SOURCE_DIR = /root/rootfs/catkin_ws/src
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /root/rootfs/rootfs/catkin_ws/build
+CMAKE_BINARY_DIR = /root/rootfs/catkin_ws/build
 
 # Utility rule file for _ros_basics_tutorials_generate_messages_check_deps_BoundingBox.
 
@@ -54,7 +54,7 @@ CMAKE_BINARY_DIR = /root/rootfs/rootfs/catkin_ws/build
 include ros_basics_tutorials/CMakeFiles/_ros_basics_tutorials_generate_messages_check_deps_BoundingBox.dir/progress.make
 
 ros_basics_tutorials/CMakeFiles/_ros_basics_tutorials_generate_messages_check_deps_BoundingBox:
-	cd /root/rootfs/rootfs/catkin_ws/build/ros_basics_tutorials && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py ros_basics_tutorials /root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg 
+	cd /root/rootfs/catkin_ws/build/ros_basics_tutorials && ../catkin_generated/env_cached.sh /usr/bin/python3 /opt/ros/noetic/share/genmsg/cmake/../../../lib/genmsg/genmsg_check_deps.py ros_basics_tutorials /root/rootfs/catkin_ws/src/ros_basics_tutorials/msg/BoundingBox.msg 
 
 _ros_basics_tutorials_generate_messages_check_deps_BoundingBox: ros_basics_tutorials/CMakeFiles/_ros_basics_tutorials_generate_messages_check_deps_BoundingBox
 _ros_basics_tutorials_generate_messages_check_deps_BoundingBox: ros_basics_tutorials/CMakeFiles/_ros_basics_tutorials_generate_messages_check_deps_BoundingBox.dir/build.make
@@ -67,10 +67,10 @@ ros_basics_tutorials/CMakeFiles/_ros_basics_tutorials_generate_messages_check_de
 .PHONY : ros_basics_tutorials/CMakeFiles/_ros_basics_tutorials_generate_messages_check_deps_BoundingBox.dir/build
 
 ros_basics_tutorials/CMakeFiles/_ros_basics_tutorials_generate_messages_check_deps_BoundingBox.dir/clean:
-	cd /root/rootfs/rootfs/catkin_ws/build/ros_basics_tutorials && $(CMAKE_COMMAND) -P CMakeFiles/_ros_basics_tutorials_generate_messages_check_deps_BoundingBox.dir/cmake_clean.cmake
+	cd /root/rootfs/catkin_ws/build/ros_basics_tutorials && $(CMAKE_COMMAND) -P CMakeFiles/_ros_basics_tutorials_generate_messages_check_deps_BoundingBox.dir/cmake_clean.cmake
 .PHONY : ros_basics_tutorials/CMakeFiles/_ros_basics_tutorials_generate_messages_check_deps_BoundingBox.dir/clean
 
 ros_basics_tutorials/CMakeFiles/_ros_basics_tutorials_generate_messages_check_deps_BoundingBox.dir/depend:
-	cd /root/rootfs/rootfs/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/rootfs/rootfs/catkin_ws/src /root/rootfs/rootfs/catkin_ws/src/ros_basics_tutorials /root/rootfs/rootfs/catkin_ws/build /root/rootfs/rootfs/catkin_ws/build/ros_basics_tutorials /root/rootfs/rootfs/catkin_ws/build/ros_basics_tutorials/CMakeFiles/_ros_basics_tutorials_generate_messages_check_deps_BoundingBox.dir/DependInfo.cmake --color=$(COLOR)
+	cd /root/rootfs/catkin_ws/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /root/rootfs/catkin_ws/src /root/rootfs/catkin_ws/src/ros_basics_tutorials /root/rootfs/catkin_ws/build /root/rootfs/catkin_ws/build/ros_basics_tutorials /root/rootfs/catkin_ws/build/ros_basics_tutorials/CMakeFiles/_ros_basics_tutorials_generate_messages_check_deps_BoundingBox.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : ros_basics_tutorials/CMakeFiles/_ros_basics_tutorials_generate_messages_check_deps_BoundingBox.dir/depend
 

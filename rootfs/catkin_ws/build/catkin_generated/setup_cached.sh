@@ -7,4 +7,4 @@
 # new environment variables
 
 # modified environment variables
-export PWD='/root/rootfs/rootfs/catkin_ws/build'
+export PWD='/root/rootfs/catkin_ws/build'
