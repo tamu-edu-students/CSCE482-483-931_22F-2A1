@@ -1,27 +1,18 @@
 #!/usr/bin/env python3
 #Checkout http://wiki.ros.org/cv_bridge/Tutorials
+
 import sys
 import cv2
 import rospy
 import numpy as np
 from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
-import torch
 import sys
 sys.path.insert(0, r'rootfs/catkin_ws/src/ros_basics_tutorials/scripts/HybridNets/')
 import time
-import cv2
 import torch
 import torchvision.transforms as T
-import torch
-import time
-import cv2
-
-import time
-import torch
 from torch.backends import cudnn
-import cv2
-import numpy as np
 from glob import glob
 from HybridNets.utils.utils import letterbox, scale_coords, postprocess, BBoxTransform, ClipBoxes, restricted_float, \
     boolean_string, Params
@@ -30,60 +21,50 @@ import os
 from torchvision import transforms
 import argparse
 from HybridNets.utils.constants import *
-from glob import glob
 from ros_basics_tutorials.msg import BoundingBox, BoundingBoxes, ObjectCount
-#import cv2_imshow
+
 
 boxes = BoundingBoxes();
-# load model
-model = torch.hub.load('datvuthanh/hybridnets', 'hybridnets', pretrained=True, trust_repo=True)
+
+# load models from pytorch
+model = torch.hub.load('datvuthanh/hybridnets', 'hybridnets', pretrained=True,trust_repo=True)
 torch.save(model.state_dict(), 'model_weights.pth')
 weight = (torch.load('model_weights.pth'))
 model.requires_grad_(False) #Note: something about the training, recheck
 model.eval()
 color_list_seg = {}
 
-
+# initialize the bridge library to transfer bag file into cv2 file 
 bridge = CvBridge()
-print("check-point")
+
 def callback_Img(data):
+	# Reading the images and catch the error if any
 	try:
 		img = bridge.imgmsg_to_cv2(data, desired_encoding='rgb8')
 	except CvBridgeError as e:
 		print(e)
 
-	# Initialization
-	params = Params(f'/root/rootfs/catkin_ws/src/ros_basics_tutorials/scripts/bdd100k.yml')
-	input_imgs = []
-	shapes = []
-	output = '/root/rootfs/catkin_ws/src/ros_basics_tutorials/scripts/'
-	output = output[:-1]
-	# Might not need this in the ROS package
-	source = '/content'
-	img_path = glob(f'{source}/*.jpg')
-	color_list_seg = {}
-	for seg_class in params.seg_list:
-		# edit your color here if you wanna fix to your liking
-		color_list_seg[seg_class] = list(np.random.choice(range(256), size=3))
-	#compound_coef = args.compound_coef
-	#source = args.source
-
+	# Initialization of paths
+	# NOTE: change your path accordingly 
+	params = Params(f'/root/rootfs/catkin_ws/src/ros_basics_tutorials/scripts/bdd100k.yml') 
 	input_imgs = []
 	shapes = []
 	det_only_imgs = []
+	# NOTE: change your path accordingly 
+	output = '/root/rootfs/catkin_ws/src/ros_basics_tutorials/scripts/' 
+	output = output[:-1]
+	source = '/content' # NOTE: change your path accordingly 
+	img_path = glob(f'{source}/*.jpg')
+	color_list_seg = {}
+	
+	for seg_class in params.seg_list:
+		# edit your color here if you wanna fix to your liking
+		color_list_seg[seg_class] = list(np.random.choice(range(256), size=3))
 
 	anchors_ratios = params.anchors_ratios
 	anchors_scales = params.anchors_scales
-
-
-	#imshow = args.imshow
-	#imwrite = args.imwrite
-	#show_det = args.show_det
-	#show_seg = args.show_seg
-	#os.makedirs(output, exist_ok=True)
-
-	#use_cuda = args.cuda
-	#use_float16 = args.float16
+	
+	# for running in GPU
 	cudnn.fastest = True
 	cudnn.benchmark = True
 
@@ -91,23 +72,13 @@ def callback_Img(data):
 	seg_list = params.seg_list
 
 	color_list = standard_to_bgr(STANDARD_COLORS)
-	# ori_imgs = [cv2.imread(i, cv2.IMREAD_COLOR | cv2.IMREAD_IGNORE_ORIENTATION) for i in img_path] # Change
-	#ori_imgs = cv2.imread(img, cv2.IMREAD_COLOR | cv2.IMREAD_IGNORE_ORIENTATION)
 	
-	#img1 = cv2.imread(img, cv2.IMREAD_COLOR | cv2.IMREAD_IGNORE_ORIENTATION) 
-	#ori_imgs.append(img)
-	#ori_imgs = [cv2.cvtColor(i, cv2.COLOR_BGR2RGB) for i in ori_imgs]
-	#print(len(img))
-	ori_imgs = [cv2.cvtColor(img, cv2.COLOR_BGR2RGB)]
-	#print(len(ori_imgs))
-	#cv2.imwrite(f'{output}/i.jpg', ori_imgs[0])
-	#print(f"FOUND {len(ori_imgs)} IMAGES")
-	# cv2.imwrite('ori.jpg', ori_imgs[0])
-	# cv2.imwrite('normalized.jpg', normalized_imgs[0]*255)
-	#cv2.imwrite(f'test.jpg', ori_imgs[0])
+	# IMPORTANT: convert your image to RGB color space and put it into array
+	ori_imgs = [cv2.cvtColor(img, cv2.COLOR_BGR2RGB)] 
 	resized_shape = params.model['image_size']
+	
+	# Resizing
 	if isinstance(resized_shape, list):
-		#print("testing in the
 		resized_shape = max(resized_shape)
 		normalize = transforms.Normalize(
 		mean=params.mean, std=params.std
@@ -126,17 +97,12 @@ def callback_Img(data):
 			      scaleup=False)
 
 		input_imgs.append(input_img)
-		# cv2.imwrite('input.jpg', input_img * 255)
 		shapes.append(((h0, w0), ((h / h0, w / w0), pad)))  # for COCO mAP rescaling
 
 
-
+	# Using pytorch
 	x = torch.stack([transform(fi) for fi in input_imgs], 0)
-
 	x = x.to(torch.float32)
-	# print(x.shape)
-	#weight = torch.load(weight)
-	#new_weight = OrderedDict((k[6:], v) for k, v in weight['model'].items())
 	weight_last_layer_seg = weight['segmentation_head.0.weight']
 	if weight_last_layer_seg.size(0) == 1:
 		seg_mode = BINARY_MODE
@@ -145,14 +111,13 @@ def callback_Img(data):
 			seg_mode = MULTILABEL_MODE
 		else:
 			seg_mode = MULTICLASS_MODE
-	#print("DETECTED SEGMENTATION MODE FROM WEIGHT AND PROJECT FILE:", seg_mode)
-
+	#print("DETECTED SEGMENTATION MODE FROM WEIGHT AND PROJECT FILE:", seg_mode) # -> For testing 
+	
 	model.load_state_dict(weight)
-
 	model.requires_grad_(False)
 	model.eval()
-
-
+	
+	# NOTE: find the road segments and lane detections
 	with torch.no_grad():
 		features, regression, classification, anchors, seg = model(x)
 
@@ -179,23 +144,20 @@ def callback_Img(data):
 				for index, seg_class in enumerate(params.seg_list):
 					color_seg[seg_mask_ == index+1] = color_list_seg[seg_class]
 				color_seg = color_seg[..., ::-1]  # RGB -> BGR
-				#cv2.imwrite('seg_test_only_{}.jpg'.format(i), color_seg)
 
 				color_mask = np.mean(color_seg, 2)  # (H, W, C) -> (H, W), check if any pixel is not background
 				# prepare to show det on 2 different imgs
 				# (with and without seg) -> (full and det_only)
 				####important
 				det_only_imgs.append(ori_imgs[i].copy())
-				seg_img = ori_imgs[i]  # do not work on original images if MULTILABEL_MODE IMPORTANT
+				seg_img = ori_imgs[i]  # do not work on original images if MULTILABEL_MODE IMPORTANT do seg_img = ori_imgs[i].copy() in stead
 				seg_img[color_mask != 0] = seg_img[color_mask != 0] * 0.5 + color_seg[color_mask != 0] * 0.5
 				seg_img = seg_img.astype(np.uint8)
 				seg_filename = f'{output}/{i}_{params.seg_list[seg_class_index]}_seg.jpg' 
 				
 				
 				newImage = cv2.cvtColor(seg_img, cv2.COLOR_RGB2BGR)
-				#cv2.imwrite(seg_filename, cv2.cvtColor(seg_img, cv2.COLOR_RGB2BGR))
-				#print(seg_filename)
-				cv2.imwrite(seg_filename, cv2.cvtColor(newImage, cv2.COLOR_RGB2BGR))
+				cv2.imwrite(seg_filename, cv2.cvtColor(newImage, cv2.COLOR_RGB2BGR)) # producing image output, might comment out if unneccessary
 				
 				seg_img = seg_img.astype(np.uint8)
 
@@ -208,9 +170,10 @@ def callback_Img(data):
 		show_det = True #Might change this
 		imshow = False
 		imwrite = True
+		
+		# Note: Drawing the bounding box for cars
+		
 		for i in range(len(ori_imgs)):
-			#print(i)
-			#cv2_imshow(ori_imgs[i])
 			out[i]['rois'] = scale_coords(ori_imgs[i][:2], out[i]['rois'], shapes[i][0], shapes[i][1])
 			boxes.bounding_boxes = []
 			for j in range(len(out[i]['rois'])):
@@ -229,14 +192,6 @@ def callback_Img(data):
 				box.probability = score
 				box.Class = obj
 				boxes.bounding_boxes.append(box)
-				
-				#print(box.xmin)
-				#print(box.xmax)
-				#print(box.ymin)
-				#print(box.ymax)
-				#print(box.id)
-				#print(box.probability)
-				#print(box.Class)
 				boxPub.publish(boxes);
 
 
@@ -254,18 +209,17 @@ def callback_Img(data):
 				cv2.imwrite(f'{output}/{i}.jpg', cv2.cvtColor(ori_imgs[i], cv2.COLOR_RGB2BGR))
 
 	gray = cv2.cvtColor(ori_imgs[0], cv2.COLOR_BGR2GRAY) # This is for vnc output
-	#gray = cv2.cvtColor(gray, cv2.COLOR_GRAY2RGB)
-	#Important
+	
+	# Convert into color spaces for image outputs
 	color = ori_imgs[0].copy() #This is for images output
 	color = cv2.cvtColor(color, cv2.COLOR_BGR2RGB)
 	cv2.imwrite(f'{output}/{i}.jpg', cv2.cvtColor(color, cv2.COLOR_RGB2BGR))
-	#print("check-point")
-	#cv2.imshow('img',gray)
 	
-	grayImageMsg = CvBridge().cv2_to_imgmsg(gray.astype(np.uint8)) #change
+	# Transfer back into bag file type images
+	grayImageMsg = CvBridge().cv2_to_imgmsg(gray.astype(np.uint8)) 
 	grayImageMsg.header = data.header
-	grayImageMsg.encoding = '8UC1' #Change
-	grayImgPub.publish(grayImageMsg) #Change
+	grayImageMsg.encoding = '8UC1'
+	grayImgPub.publish(grayImageMsg) 
 
 
 
@@ -275,31 +229,11 @@ def callback_Img(data):
 	
 
 
-
+# Publish ros into img_gray
 rospy.init_node('img_record_node')
 rospy.Subscriber("/front_camera/image_raw", Image, callback_Img)
 grayImgPub = rospy.Publisher('/img_gray', Image, queue_size=10)
 boxPub = rospy.Publisher('bounding_boxes', BoundingBoxes, queue_size=10)
 rospy.spin()
 
-#Checkout http://wiki.ros.org/cv_bridge/Tutorials
-# import sys
-# import cv2
-# import rospy
-# import numpy as np
-# from cv_bridge import CvBridge
-# from sensor_msgs.msg import Image
 
-# bridge = CvBridge()
-# def callback_Img(data):
-#     img = bridge.imgmsg_to_cv2(data, desired_encoding='rgb8')
-#     gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-#     grayImageMsg = CvBridge().cv2_to_imgmsg(gray.astype(np.uint8))
-#     grayImageMsg.header = data.header
-#     grayImageMsg.encoding = '8UC1'
-#     grayImgPub.publish(grayImageMsg)
-
-# rospy.init_node('img_record_node')
-# rospy.Subscriber("/front_camera/image_raw", Image, callback_Img)
-# grayImgPub = rospy.Publisher('/img_gray', Image, queue_size=10)
-# rospy.spin()
